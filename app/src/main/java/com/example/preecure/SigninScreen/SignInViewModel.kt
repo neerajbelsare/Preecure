@@ -1,12 +1,10 @@
-package com.example.preecure
+package com.example.preecure.SigninScreen
 
-import android.content.Intent
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
+import com.example.preecure.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInViewModel : ViewModel() {

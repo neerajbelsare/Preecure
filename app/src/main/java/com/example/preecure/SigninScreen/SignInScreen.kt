@@ -1,4 +1,4 @@
-package com.example.preecure
+package com.example.preecure.SigninScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -6,7 +6,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -14,15 +13,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.material.SnackbarDefaults.backgroundColor
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import com.example.preecure.R
 
 @Preview
 @Composable
 fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
+    val allInputsFilled = signInViewModel.email.isNotBlank() && signInViewModel.password.isNotBlank()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -30,7 +31,7 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
         verticalArrangement = Arrangement.Bottom
     ) {
         Text(
-            text = "Sign In",
+            text = "Sign Up",
             style = MaterialTheme.typography.h4,
             modifier = Modifier.padding(bottom = 16.dp)
         )
@@ -60,7 +61,8 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
             Button(
                 onClick = {},
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                enabled = allInputsFilled
             ) {
                 CircularProgressIndicator(
                     modifier = Modifier
@@ -73,9 +75,10 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
             Button(
                 onClick = { signInViewModel.signIn() },
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                enabled = allInputsFilled
             ) {
-                Text("Sign In")
+                Text("Sign Up")
             }
         }
         if (signInViewModel.isError) {
@@ -87,6 +90,24 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
         TextButton(onClick = { /*TODO*/ }) {
             Text(text = "Forgot password?")
         }
+
+        Spacer(modifier = Modifier
+            .height(1.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Or",
+                modifier = Modifier.padding(bottom = 16.dp),
+                color = Color.Gray
+            )
+        }
+
+        Spacer(modifier = Modifier
+            .height(1.dp))
 
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -132,6 +153,23 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
                     painterResource(id = R.drawable.apple_icon),
                     contentDescription = "Apple Icon"
                 )
+            }
+        }
+        
+        Spacer(modifier = Modifier
+            .height(1.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Already have an account? ",
+            )
+
+            TextButton(onClick = { /*TODO*/ }) {
+                Text(text = "Sign In")
             }
         }
     }
