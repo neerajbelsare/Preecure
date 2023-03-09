@@ -4,8 +4,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.preecure.MainActivity
+import com.example.preecure.Utils.LoadingState
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class SignInViewModel : ViewModel() {
     var email by mutableStateOf("")
@@ -14,6 +22,7 @@ class SignInViewModel : ViewModel() {
     var isError by mutableStateOf(false)
     var isEmpty by mutableStateOf(false)
     var errorMessage by mutableStateOf("")
+    val loadingState = MutableStateFlow(LoadingState.IDLE)
 
     private lateinit var user: FirebaseAuth
 
@@ -34,6 +43,16 @@ class SignInViewModel : ViewModel() {
             }
         }else{
             isEmpty = true
+        }
+    }
+
+    fun signWithGoogleCredential(credential: AuthCredential) = viewModelScope.launch {
+        try {
+            loadingState.emit(LoadingState.LOADING)
+            Firebase.auth.signInWithCredential(credential).await()
+            loadingState.emit(LoadingState.LOADED)
+        } catch (e: Exception) {
+            loadingState.emit(LoadingState.error(e.localizedMessage))
         }
     }
 }

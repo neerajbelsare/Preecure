@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Preecure</string>
+    <string name="facebook_app_id">556684506559083</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">2592ad9d5424991269c411a3974d8162</string>
 </resources>
