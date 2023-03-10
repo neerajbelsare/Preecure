@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.preecure.SigninScreen.SignInScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.preecure.navigation.NavGraph
+import com.example.preecure.screens.SignupScreen.SignUpScreen
 import com.example.preecure.ui.theme.PreecureTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,12 +17,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PreecureTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    SignInScreen()
+                    val navController = rememberNavController()
+                    NavGraph(navController = navController)
                 }
             }
         }

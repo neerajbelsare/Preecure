@@ -1,4 +1,4 @@
-package com.example.preecure.SigninScreen
+package com.example.preecure.screens.SigninScreen
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

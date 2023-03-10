@@ -1,4 +1,4 @@
-package com.example.preecure.SigninScreen
+package com.example.preecure.screens.SignupScreen
 
 import android.util.Log
 import android.widget.Toast
@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.Image
@@ -21,19 +20,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 import com.example.preecure.R
 import com.example.preecure.Utils.LoadingState
+import com.example.preecure.navigation.Screens
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
-@Preview
 @Composable
-fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
-    val allInputsFilled = signInViewModel.email.isNotBlank() && signInViewModel.password.isNotBlank()
+fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel = viewModel()) {
+    val allInputsFilled = signUpViewModel.email.isNotBlank() && signUpViewModel.password.isNotBlank()
 
-    val status by signInViewModel.loadingState.collectAsState()
+    val status by signUpViewModel.loadingState.collectAsState()
     val context = LocalContext.current
     val token = stringResource(R.string.default_web_client_id)
 
@@ -43,7 +43,7 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
         try {
             val account = task.getResult(ApiException::class.java)!!
             val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
-            signInViewModel.signWithGoogleCredential(credential)
+            signUpViewModel.signWithGoogleCredential(credential)
         } catch (e: ApiException) {
             Log.w("TAG", "Google sign in failed", e)
         }
@@ -61,8 +61,8 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
         OutlinedTextField(
-            value = signInViewModel.email,
-            onValueChange = { signInViewModel.email = it },
+            value = signUpViewModel.email,
+            onValueChange = { signUpViewModel.email = it },
             label = { Text("Email address") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email,
@@ -71,8 +71,8 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = signInViewModel.password,
-            onValueChange = { signInViewModel.password = it },
+            value = signUpViewModel.password,
+            onValueChange = { signUpViewModel.password = it },
             label = { Text("Password") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password,
@@ -82,7 +82,7 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
             modifier = Modifier
                 .fillMaxWidth()
         )
-        if (signInViewModel.isLoading) {
+        if (signUpViewModel.isLoading) {
             Button(
                 onClick = {},
                 modifier = Modifier
@@ -98,7 +98,7 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
             }
         } else {
             Button(
-                onClick = { signInViewModel.signIn() },
+                onClick = { signUpViewModel.signIn() },
                 modifier = Modifier
                     .fillMaxWidth(),
                 enabled = allInputsFilled
@@ -106,18 +106,16 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
                 Text("Sign Up")
             }
         }
-        if (signInViewModel.isError) {
+        if (signUpViewModel.isError) {
             Text(
-                text = signInViewModel.errorMessage,
+                text = signUpViewModel.errorMessage,
                 color = MaterialTheme.colors.error
             )
         }
-        TextButton(onClick = { /*TODO*/ }) {
-            Text(text = "Forgot password?")
-        }
+
 
         Spacer(modifier = Modifier
-            .height(1.dp))
+            .height(30.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -173,20 +171,6 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
                     contentDescription = "Facebook Icon"
                 )
             }
-
-            Button(
-                modifier = Modifier,
-                elevation = ButtonDefaults.elevation(0.dp, 0.dp),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Transparent
-                ),
-                onClick = { /* Handle button click */ }
-            ) {
-                Image(
-                    painterResource(id = R.drawable.apple_icon),
-                    contentDescription = "Apple Icon"
-                )
-            }
         }
         
         Spacer(modifier = Modifier
@@ -201,7 +185,7 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
                 text = "Already have an account? ",
             )
 
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(onClick = {navController.navigate(Screens.Signin.route)}) {
                 Text(text = "Sign In")
             }
         }
@@ -215,6 +199,5 @@ fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
             Toast.makeText(context, status.msg ?: "Error", Toast.LENGTH_SHORT).show()
         }
         else -> {}
-
     }
 }
