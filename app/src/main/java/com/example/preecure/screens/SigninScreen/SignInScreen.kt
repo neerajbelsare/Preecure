@@ -4,22 +4,24 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.foundation.Image
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.preecure.R
 import com.example.preecure.Utils.LoadingState
@@ -36,7 +38,6 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
     val status by signInViewModel.loadingState.collectAsState()
     val context = LocalContext.current
     val token = stringResource(R.string.default_web_client_id)
-
 
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
         val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
@@ -106,18 +107,19 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
                 Text("Sign In")
             }
         }
+
         if (signInViewModel.isError) {
             Text(
-                text = signInViewModel.errorMessage,
-                color = MaterialTheme.colors.error
+                text = signInViewModel.errorMessage
             )
         }
-        TextButton(onClick = { /*TODO*/ }) {
-            Text(text = "Forgot password?")
+
+        if(signInViewModel.isLoggedIn) {
+            navController.navigate(Screens.Home.route)
         }
 
         Spacer(modifier = Modifier
-            .height(1.dp))
+            .height(30.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -137,7 +139,7 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
-            .fillMaxWidth()) {
+                .fillMaxWidth()) {
             Button(
                 modifier = Modifier,
                 elevation = ButtonDefaults.elevation(0.dp, 0.dp),
@@ -166,7 +168,9 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.Transparent
                 ),
-                onClick = {  }
+                onClick = {
+
+                }
             ) {
                 Image(
                     painterResource(id = R.drawable.facebook_icon),
@@ -174,7 +178,7 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
                 )
             }
         }
-        
+
         Spacer(modifier = Modifier
             .height(1.dp))
 
@@ -184,19 +188,16 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "New to Preecure? ",
+                text = "New to Preecure?",
             )
 
-            TextButton(onClick = { navController.navigate(Screens.Signup.route)}) {
+            TextButton(onClick = {navController.navigate(Screens.Signup.route)}) {
                 Text(text = "Sign Up")
             }
         }
     }
 
     when (status.status) {
-        LoadingState.Status.SUCCESS -> {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-        }
         LoadingState.Status.FAILED -> {
             Toast.makeText(context, status.msg ?: "Error", Toast.LENGTH_SHORT).show()
         }

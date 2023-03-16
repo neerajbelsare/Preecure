@@ -24,9 +24,15 @@ import androidx.navigation.NavController
 import com.example.preecure.R
 import com.example.preecure.Utils.LoadingState
 import com.example.preecure.navigation.Screens
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 @Composable
@@ -36,7 +42,6 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
     val status by signUpViewModel.loadingState.collectAsState()
     val context = LocalContext.current
     val token = stringResource(R.string.default_web_client_id)
-
 
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
         val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
@@ -98,7 +103,7 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
             }
         } else {
             Button(
-                onClick = { signUpViewModel.signIn() },
+                onClick = { signUpViewModel.signUp() },
                 modifier = Modifier
                     .fillMaxWidth(),
                 enabled = allInputsFilled
@@ -108,8 +113,7 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
         }
         if (signUpViewModel.isError) {
             Text(
-                text = signUpViewModel.errorMessage,
-                color = MaterialTheme.colors.error
+                text = signUpViewModel.errorMessage
             )
         }
 
@@ -192,9 +196,6 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
     }
 
     when (status.status) {
-        LoadingState.Status.SUCCESS -> {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-        }
         LoadingState.Status.FAILED -> {
             Toast.makeText(context, status.msg ?: "Error", Toast.LENGTH_SHORT).show()
         }

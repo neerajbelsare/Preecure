@@ -39,3 +39,14 @@ fun PreecureTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composab
         content = content
     )
 }
+
+@Composable
+fun MapsComposeSampleTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colors = if (darkTheme) darkColors() else lightColors(),
+        content = content
+    )
+}

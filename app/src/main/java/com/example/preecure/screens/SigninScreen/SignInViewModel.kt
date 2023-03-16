@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.preecure.MainActivity
 import com.example.preecure.Utils.LoadingState
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
@@ -21,27 +20,29 @@ class SignInViewModel : ViewModel() {
     var isLoading by mutableStateOf(false)
     var isError by mutableStateOf(false)
     var isEmpty by mutableStateOf(false)
+    var isLoggedIn by mutableStateOf(false)
     var errorMessage by mutableStateOf("")
     val loadingState = MutableStateFlow(LoadingState.IDLE)
 
     private lateinit var user: FirebaseAuth
 
     fun signIn() {
-        isLoading = true
-        isError = false
-
-        user = FirebaseAuth.getInstance()
-
-        if(email.isNotEmpty() && password.isNotEmpty()){
-            user.createUserWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity()){
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            user.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                     task ->
-                if(task.isSuccessful){
+                if(task.isSuccessful) {
                     isLoading = false
-                }else{
+                    isLoggedIn = true
+                }
+                else {
                     isError = true
+                    errorMessage = "The email or password is incorrect."
                 }
             }
-        }else{
+
+        } else {
+            isError = true
+            errorMessage = "Please fill out all the fields."
             isEmpty = true
         }
     }
@@ -51,6 +52,8 @@ class SignInViewModel : ViewModel() {
             loadingState.emit(LoadingState.LOADING)
             Firebase.auth.signInWithCredential(credential).await()
             loadingState.emit(LoadingState.LOADED)
+
+            isLoggedIn = true
         } catch (e: Exception) {
             loadingState.emit(LoadingState.error(e.localizedMessage))
         }

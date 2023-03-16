@@ -26,7 +26,7 @@ class SignUpViewModel : ViewModel() {
 
     private lateinit var user: FirebaseAuth
 
-    fun signIn() {
+    fun signUp() {
         isLoading = true
         isError = false
 
