@@ -21,18 +21,24 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -49,7 +55,6 @@ fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-//            .background(colorResource(id = R.color.colorPrimaryDark))
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
@@ -70,11 +75,10 @@ fun HomeScreenPreview() {
 }
 
 @Composable
-fun MusicScreen() {
+fun ChatScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-//            .background(colorResource(id = R.color.colorPrimaryDark))
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
@@ -90,42 +94,15 @@ fun MusicScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun MusicScreenPreview() {
-    MusicScreen()
+fun ChatScreenPreview() {
+    ChatScreen()
 }
 
 @Composable
-fun MoviesScreen() {
+fun ExploreScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-//            .background(colorResource(id = R.color.colorPrimaryDark))
-            .wrapContentSize(Alignment.Center)
-    ) {
-        Text(
-            text = "Movies View",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 25.sp
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MoviesScreenPreview() {
-    MoviesScreen()
-}
-
-
-@Composable
-fun BooksScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-//            .background(colorResource(id = R.color.colorPrimaryDark))
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
@@ -141,13 +118,12 @@ fun BooksScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun BooksScreenPreview() {
-    BooksScreen()
+fun ExploreScreenPreview() {
+    ExploreScreen()
 }
 
 @Composable
 fun ProfileScreen() {
-    TopAppbarProfile(context = LocalContext.current.applicationContext)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -165,31 +141,6 @@ fun ProfileScreenPreview() {
 }
 
 private val optionsList: ArrayList<OptionsData> = ArrayList()
-
-@Composable
-fun TopAppbarProfile(context: Context) {
-    TopAppBar(
-        title = {
-            Text(
-                text = "Profile",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        },
-        backgroundColor = MaterialTheme.colors.background,
-        elevation = 4.dp,
-        navigationIcon = {
-            IconButton(onClick = {
-                Toast.makeText(context, "Nav Button", Toast.LENGTH_SHORT).show()
-            }) {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    contentDescription = "Go back",
-                )
-            }
-        }
-    )
-}
 
 @Composable
 fun ProfileEcommerce(context: Context = LocalContext.current.applicationContext) {
@@ -238,12 +189,25 @@ private fun UserDetails(context: Context) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(16.dp)
+            .height(110.dp)
+            .border(
+                width = 1.dp,
+                color = Color.LightGray,
+                shape = RoundedCornerShape(8.dp)
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
 
         // User's image
-
+        Image(
+            modifier = Modifier
+                .size(72.dp)
+                .padding(start = 20.dp)
+                .clip(shape = CircleShape),
+            painter = painterResource(id = com.example.preecure.R.drawable.victoria),
+            contentDescription = "Your Image"
+        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -282,22 +246,6 @@ private fun UserDetails(context: Context) {
                     overflow = TextOverflow.Ellipsis
                 )
             }
-
-            // Edit button
-            IconButton(
-                modifier = Modifier
-                    .weight(weight = 1f, fill = false),
-                onClick = {
-                    Toast.makeText(context, "Edit Button", Toast.LENGTH_SHORT).show()
-                }) {
-                Icon(
-                    modifier = Modifier.size(24.dp),
-                    imageVector = Icons.Outlined.Edit,
-                    contentDescription = "Edit Details",
-                    tint = MaterialTheme.colors.primary
-                )
-            }
-
         }
     }
 }
@@ -309,9 +257,6 @@ private fun OptionsItemStyle(item: OptionsData, context: Context) {
         modifier = Modifier
             .fillMaxWidth()
             .clickable(enabled = true) {
-                Toast
-                    .makeText(context, item.title, Toast.LENGTH_SHORT)
-                    .show()
             }
             .padding(all = 16.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -366,9 +311,9 @@ private fun OptionsItemStyle(item: OptionsData, context: Context) {
             Icon(
                 modifier = Modifier
                     .weight(weight = 1f, fill = false),
-                imageVector = Icons.Outlined.CheckCircle,
+                imageVector = Icons.Outlined.ArrowForward,
                 contentDescription = item.title,
-                tint = Color.Black.copy(alpha = 0.70f)
+                tint = MaterialTheme.colors.primary
             )
         }
 
@@ -384,6 +329,14 @@ private fun prepareOptionsData() {
             icon = appIcons.Person,
             title = "Account",
             subTitle = "Manage your account"
+        )
+    )
+
+    optionsList.add(
+        OptionsData(
+            icon = appIcons.ThumbUp,
+            title = "My Health",
+            subTitle = "Manage your prescriptions and schedules"
         )
     )
 
@@ -405,7 +358,7 @@ private fun prepareOptionsData() {
 
     optionsList.add(
         OptionsData(
-            icon = appIcons.AccountBox,
+            icon = appIcons.Star,
             title = "Saved Cards",
             subTitle = "Your saved debit/credit cards"
         )
@@ -421,7 +374,7 @@ private fun prepareOptionsData() {
 
     optionsList.add(
         OptionsData(
-            icon = appIcons.Settings,
+            icon = appIcons.Info,
             title = "Help Center",
             subTitle = "FAQs and customer support"
         )
@@ -432,14 +385,6 @@ private fun prepareOptionsData() {
             icon = appIcons.Build,
             title = "Offers and Coupons",
             subTitle = "Offers and coupon codes for you"
-        )
-    )
-
-    optionsList.add(
-        OptionsData(
-            icon = appIcons.FavoriteBorder,
-            title = "Wishlist",
-            subTitle = "Items you saved"
         )
     )
 }

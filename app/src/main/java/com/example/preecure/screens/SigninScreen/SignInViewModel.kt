@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.preecure.Utils.LoadingState
+import com.example.preecure.navigation.Screens
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -36,12 +37,14 @@ class SignInViewModel : ViewModel() {
                 }
                 else {
                     isError = true
+                    isLoggedIn = false
                     errorMessage = "The email or password is incorrect."
                 }
             }
 
         } else {
             isError = true
+            isLoggedIn = false
             errorMessage = "Please fill out all the fields."
             isEmpty = true
         }

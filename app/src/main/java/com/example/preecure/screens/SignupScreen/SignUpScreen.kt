@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.Image
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,6 +35,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.auth.User
 
 @Composable
 fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel = viewModel()) {
@@ -64,6 +66,26 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
             text = "Sign Up",
             style = MaterialTheme.typography.h4,
             modifier = Modifier.padding(bottom = 16.dp)
+        )
+        OutlinedTextField(
+            value = signUpViewModel.name,
+            onValueChange = { signUpViewModel.name = it },
+            label = { Text("Name") },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = signUpViewModel.phone,
+            onValueChange = { signUpViewModel.phone = it },
+            label = { Text("Phone Number") },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next,
+            ),
+            modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
             value = signUpViewModel.email,
@@ -103,7 +125,7 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
             }
         } else {
             Button(
-                onClick = { signUpViewModel.signUp() },
+                onClick = { signUpViewModel.signUp(newUser(signUpViewModel.name, signUpViewModel.phone, signUpViewModel.email, signUpViewModel.password)) },
                 modifier = Modifier
                     .fillMaxWidth(),
                 enabled = allInputsFilled
@@ -113,10 +135,16 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
         }
         if (signUpViewModel.isError) {
             Text(
+                modifier = Modifier
+                    .padding(top = 10.dp),
+                color = Color.Red,
                 text = signUpViewModel.errorMessage
             )
         }
 
+        if (signUpViewModel.isError) {
+            navController.navigate(Screens.Home.route)
+        }
 
         Spacer(modifier = Modifier
             .height(30.dp))

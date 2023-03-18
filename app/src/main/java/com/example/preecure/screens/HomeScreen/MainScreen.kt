@@ -46,14 +46,12 @@ fun Navigation(navController: NavHostController) {
         composable(NavigationItem.Home.route) {
             HomeScreen()
         }
-        composable(NavigationItem.Music.route) {
-            MusicScreen()
+        composable(NavigationItem.Chat.route) {
+            ChatScreen()
         }
-        composable(NavigationItem.Movies.route) {
-            MoviesScreen()
-        }
-        composable(NavigationItem.Books.route) {
-            BooksScreen()
+
+        composable(NavigationItem.Explore.route) {
+            ExploreScreen()
         }
         composable(NavigationItem.Profile.route) {
             ProfileScreen()
@@ -65,9 +63,8 @@ fun Navigation(navController: NavHostController) {
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         NavigationItem.Home,
-        NavigationItem.Music,
-        NavigationItem.Movies,
-        NavigationItem.Books,
+        NavigationItem.Chat,
+        NavigationItem.Explore,
         NavigationItem.Profile
     )
     BottomNavigation(
@@ -104,124 +101,3 @@ fun BottomNavigationBar(navController: NavController) {
         }
     }
 }
-
-//@Composable
-//fun HomeScreen() {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .wrapContentSize(Alignment.Center)
-//    ) {
-//        Text(
-//            text = "Home View",
-//            fontWeight = FontWeight.Bold,
-//            color = Color.White,
-//            modifier = Modifier.align(Alignment.CenterHorizontally),
-//            textAlign = TextAlign.Center,
-//            fontSize = 25.sp
-//        )
-//    }
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun HomeScreenPreview() {
-//    HomeScreen()
-//}
-//
-//@Composable
-//fun MusicScreen() {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .wrapContentSize(Alignment.Center)
-//    ) {
-//        Text(
-//            text = "Music View",
-//            fontWeight = FontWeight.Bold,
-//            color = Color.White,
-//            modifier = Modifier.align(Alignment.CenterHorizontally),
-//            textAlign = TextAlign.Center,
-//            fontSize = 25.sp
-//        )
-//    }
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun MusicScreenPreview() {
-//    MusicScreen()
-//}
-//
-//@Composable
-//fun MoviesScreen() {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .wrapContentSize(Alignment.Center)
-//    ) {
-//        Text(
-//            text = "Movies View",
-//            fontWeight = FontWeight.Bold,
-//            color = Color.White,
-//            modifier = Modifier.align(Alignment.CenterHorizontally),
-//            textAlign = TextAlign.Center,
-//            fontSize = 25.sp
-//        )
-//    }
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun MoviesScreenPreview() {
-//    MoviesScreen()
-//}
-//
-//
-//@Composable
-//fun BooksScreen() {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .wrapContentSize(Alignment.Center)
-//    ) {
-//        Text(
-//            text = "Books View",
-//            fontWeight = FontWeight.Bold,
-//            color = Color.White,
-//            modifier = Modifier.align(Alignment.CenterHorizontally),
-//            textAlign = TextAlign.Center,
-//            fontSize = 25.sp
-//        )
-//    }
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun BooksScreenPreview() {
-//    BooksScreen()
-//}
-//
-//@Composable
-//fun ProfileScreen() {
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .wrapContentSize(Alignment.Center)
-//    ) {
-//        Text(
-//            text = "Profile View",
-//            fontWeight = FontWeight.Bold,
-//            color = Color.White,
-//            modifier = Modifier.align(Alignment.CenterHorizontally),
-//            textAlign = TextAlign.Center,
-//            fontSize = 25.sp
-//        )
-//    }
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun ProfileScreenPreview() {
-//    ProfileScreen()
-//}
