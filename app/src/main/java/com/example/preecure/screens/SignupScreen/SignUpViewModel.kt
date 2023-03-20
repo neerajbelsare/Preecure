@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.preecure.MainActivity
 import com.example.preecure.Utils.LoadingState
 import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,8 +16,12 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlin.random.Random
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel() : ViewModel() {
+
+    private lateinit var firestore: FirebaseFirestore
+
     var name by mutableStateOf("")
     var phone by mutableStateOf("")
     var email by mutableStateOf("")
@@ -30,14 +32,13 @@ class SignUpViewModel : ViewModel() {
     var isSignedUp by mutableStateOf(false)
     var errorMessage by mutableStateOf("")
     val loadingState = MutableStateFlow(LoadingState.IDLE)
-
     fun signUp(user: newUser) {
         isLoading = true
         isError = false
 
         val auth = Firebase.auth
         val db = Firebase.firestore
-        val username = generateUniqueUsername(name, db)
+        var username = generateAndStoreUsername(user.name)
 
         if(email.isNotEmpty() && password.isNotEmpty()) {
             auth.createUserWithEmailAndPassword(user.email, user.password)
@@ -78,43 +79,39 @@ class SignUpViewModel : ViewModel() {
             }
     }
 
+    fun generateUsername(name: String): String {
+        val prefix = name.lowercase().replace(" ", "")
+        val suffix = (10000..99999).random()
+        return "$prefix$suffix"
+    }
+
+    fun generateAndStoreUsername(name: String): String {
+        firestore = FirebaseFirestore.getInstance()
+
+        val username = generateUsername(name)
+        val usersRef = firestore.collection("users")
+        val query = usersRef.whereEqualTo("username", username)
+
+        query.get().addOnSuccessListener { documents ->
+            if (documents.isEmpty) {
+                return@addOnSuccessListener
+            } else {
+                generateAndStoreUsername(name)
+            }
+        }
+
+        return username
+    }
+
     fun signWithGoogleCredential(credential: AuthCredential) = viewModelScope.launch {
         try {
             loadingState.emit(LoadingState.LOADING)
             Firebase.auth.signInWithCredential(credential).await()
             loadingState.emit(LoadingState.LOADED)
+
+            isSignedUp = true
         } catch (e: Exception) {
             loadingState.emit(LoadingState.error(e.localizedMessage))
         }
     }
-
-    private fun generateRandomString(length: Int): String {
-        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
-        return (1..length)
-            .map { allowedChars.random() }
-            .joinToString("")
-    }
-
-    private fun generateUniqueUsername(name: String, db: FirebaseFirestore): String {
-        val username = name.replace(" ", "") // remove spaces from name
-        var suffix = generateRandomString(6) // generate initial suffix
-        var usernameWithSuffix = "$username$suffix" // concatenate username and suffix
-        var usernameExists = true // flag to check uniqueness
-        while (usernameExists) {
-            // check if the username is unique by querying Firestore
-            val query = db.collection("users").whereEqualTo("username", usernameWithSuffix)
-            val result = query.get().addOnSuccessListener {
-                usernameExists = false
-            }
-//            if (result.isEmpty) {
-//                isUnique = true
-//            } else {
-//                // if the username is not unique, generate a new suffix and try again
-//                suffix = generateRandomString(6)
-//                usernameWithSuffix = "$username$suffix"
-//            }
-        }
-        return usernameWithSuffix // return the unique username
-    }
-
 }

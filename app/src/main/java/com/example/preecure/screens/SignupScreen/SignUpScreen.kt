@@ -35,6 +35,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 
 @Composable
@@ -142,7 +143,7 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
             )
         }
 
-        if (signUpViewModel.isError) {
+        if (signUpViewModel.isSignedUp) {
             navController.navigate(Screens.Home.route)
         }
 

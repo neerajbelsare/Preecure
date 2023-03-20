@@ -11,10 +11,12 @@ import androidx.navigation.compose.rememberNavController
 import com.example.preecure.navigation.NavGraph
 import com.example.preecure.screens.SignupScreen.SignUpScreen
 import com.example.preecure.ui.theme.PreecureTheme
+import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContent {
             PreecureTheme {
                 Surface(
