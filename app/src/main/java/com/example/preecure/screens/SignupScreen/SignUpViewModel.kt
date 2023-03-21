@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlin.random.Random
 
-class SignUpViewModel() : ViewModel() {
+class SignUpViewModel : ViewModel() {
 
     private lateinit var firestore: FirebaseFirestore
 
@@ -47,8 +47,10 @@ class SignUpViewModel() : ViewModel() {
                         "name" to user.name,
                         "email" to user.email,
                         "phone" to user.phoneNumber,
-                        "password" to user.password,
-                        "username" to username
+                        "username" to username,
+                        "isDoctor" to false,
+                        "isPharmacy" to false,
+                        "imageUrl" to "https://drive.google.com/file/d/1jaMTdkE-IxTEHRVsHaDwUNTEHm-U8xVw/view?usp=sharing"
                     )
 
                     db.collection("users")

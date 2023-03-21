@@ -1,5 +1,6 @@
 package com.example.preecure.screens.HomeScreen
 
+import android.app.ListActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.R
@@ -16,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -47,6 +49,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.preecure.navigation.Screens
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -185,139 +191,158 @@ fun ProfileEcommerce(context: Context = LocalContext.current.applicationContext)
 
 // This composable displays user's image, name, email and edit button
 @Composable
-private fun UserDetails(context: Context) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .height(110.dp)
-            .border(
-                width = 1.dp,
-                color = Color.LightGray,
-                shape = RoundedCornerShape(8.dp)
-            ),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-
-        // User's image
-        Image(
-            modifier = Modifier
-                .size(72.dp)
-                .padding(start = 20.dp)
-                .clip(shape = CircleShape),
-            painter = painterResource(id = com.example.preecure.R.drawable.victoria),
-            contentDescription = "Your Image"
-        )
-
+private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = viewModel()) {
+    val user = profileViewModel.user.value
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .height(110.dp)
+                .background(Color.White, RoundedCornerShape(10.dp)),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
+            if(user != null) {
+            // User's image
+            Image(
                 modifier = Modifier
-                    .weight(weight = 3f, fill = false)
-                    .padding(start = 16.dp)
+                    .size(72.dp)
+                    .padding(start = 20.dp)
+                    .clip(shape = CircleShape),
+                painter = painterResource(id = com.example.preecure.R.drawable.victoria),
+                contentDescription = "Your Image"
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
+                Column(
+                    modifier = Modifier
+                        .weight(weight = 3f, fill = false)
+                        .padding(start = 16.dp)
+                ) {
 
-                // User's name
-                Text(
-                    text = "Victoria Steele",
-                    style = TextStyle(
-                        fontSize = 22.sp,
-                        fontFamily = FontFamily(Font(com.example.preecure.R.font.roboto_bold, FontWeight.Bold)),
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                    // User's name
+                    Text(
+                        text = "Name: ${user.name}",
+                        style = TextStyle(
+                            fontSize = 22.sp,
+                            fontFamily = FontFamily(
+                                Font(
+                                    com.example.preecure.R.font.roboto_bold,
+                                    FontWeight.Bold
+                                )
+                            ),
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
 
-                Spacer(modifier = Modifier.height(2.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
 
-                // User's email
-                Text(
-                    text = "email123@email.com",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontFamily = FontFamily(Font(com.example.preecure.R.font.roboto_regular, FontWeight.Normal)),
-                        color = Color.Gray,
-                        letterSpacing = (0.8).sp
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                    // User's email
+                    Text(
+                        text = "Name: ${user.email}",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontFamily = FontFamily(
+                                Font(
+                                    com.example.preecure.R.font.roboto_regular,
+                                    FontWeight.Normal
+                                )
+                            ),
+                            color = Color.Gray,
+                            letterSpacing = (0.8).sp
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
-        }
+        } else {
+                Text("Loading user details...")
+            }
     }
-}
+    }
 
 // Row style for options
 @Composable
 private fun OptionsItemStyle(item: OptionsData, context: Context) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(enabled = true) {
-            }
-            .padding(all = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-
-        // Icon
-        Icon(
-            modifier = Modifier
-                .size(32.dp),
-            imageVector = item.icon,
-            contentDescription = item.title,
-            tint = MaterialTheme.colors.primary
-        )
-
+    Box(modifier = Modifier
+        .padding(start = 16.dp, end = 16.dp)) {
         Row(
             modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+                .background(Color.White, RoundedCornerShape(10.dp))
+                .clickable(enabled = true) {
+//                    when (item.title) {
+//                        "Account" ->
+//                        "My Health" -> navigateTo(R.id.action_home_to_my_health)
+//                         Add more cases here for other options
+//                    }
+                }
+                .padding(all = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-                modifier = Modifier
-                    .weight(weight = 3f, fill = false)
-                    .padding(start = 16.dp)
-            ) {
-
-                // Title
-                Text(
-                    text = item.title,
-                    style = TextStyle(
-                        fontSize = 18.sp,
-                        fontFamily = FontFamily(Font(com.example.preecure.R.font.roboto_medium, FontWeight.Medium))
-                    )
-                )
-
-                Spacer(modifier = Modifier.height(2.dp))
-
-                // Sub title
-                Text(
-                    text = item.subTitle,
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        letterSpacing = (0.8).sp,
-                        fontFamily = FontFamily(Font(com.example.preecure.R.font.roboto_regular, FontWeight.Normal)),
-                        color = Color.Gray
-                    )
-                )
-
-            }
-
-            // Right arrow icon
+            // Icon
             Icon(
                 modifier = Modifier
-                    .weight(weight = 1f, fill = false),
-                imageVector = Icons.Outlined.ArrowForward,
+                    .size(32.dp),
+                imageVector = item.icon,
                 contentDescription = item.title,
                 tint = MaterialTheme.colors.primary
             )
-        }
 
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(
+                    modifier = Modifier
+                        .weight(weight = 3f, fill = false)
+                        .padding(start = 16.dp)
+                ) {
+
+                    // Title
+                    Text(
+                        text = item.title,
+                        style = TextStyle(
+                            fontSize = 18.sp,
+                            fontFamily = FontFamily(
+                                Font(
+                                    com.example.preecure.R.font.roboto_medium,
+                                    FontWeight.Medium
+                                )
+                            )
+                        )
+                    )
+
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    // Sub title
+                    Text(
+                        text = item.subTitle,
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            letterSpacing = (0.8).sp,
+                            fontFamily = FontFamily(
+                                Font(
+                                    com.example.preecure.R.font.roboto_regular,
+                                    FontWeight.Normal
+                                )
+                            ),
+                            color = Color.Gray
+                        )
+                    )
+
+                }
+            }
+        }
     }
+
+    Spacer(modifier = Modifier.height(10.dp))
 }
 
 private fun prepareOptionsData() {

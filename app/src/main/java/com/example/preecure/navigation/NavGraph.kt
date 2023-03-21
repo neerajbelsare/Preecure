@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.preecure.screens.SigninScreen.SignInScreen
 import com.example.preecure.screens.SignupScreen.SignUpScreen
 import androidx.compose.animation.*
+import com.example.preecure.screens.HomeScreen.AccountScreen
 import com.example.preecure.screens.HomeScreen.Home
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.firebase.auth.FirebaseAuth

@@ -1,12 +1,17 @@
 package com.example.preecure.screens.HomeScreen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.R
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -23,18 +28,15 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.preecure.navigation.NavigationItem
 
-//@Composable
-//fun Home(navController: NavController, homeViewModel: SignInViewModel = viewModel()) {
-//
-//}
-
 @Composable
 fun Home(navController: NavController) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomNavigationBar(navController) },
         content = { padding ->
-            Box(modifier = Modifier.padding(padding)) {
+            Box(modifier = Modifier
+                .padding(padding)
+                ) {
                 Navigation(navController = navController)
             }
         },
@@ -69,18 +71,23 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationItem.Profile
     )
     BottomNavigation(
-        contentColor = Color.White
+        modifier = Modifier
+            .padding(bottom = 10.dp, start = 25.dp, end = 25.dp)
+            .clip(RoundedCornerShape(30.dp))
+            .background(Color.White),
+        contentColor = Color.Black
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
                 modifier = Modifier
-                    .padding(bottom = 10.dp),
+                    .background(Color.White)
+                    .clip(RoundedCornerShape(30.dp)),
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = { Text(text = item.title) },
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.White.copy(0.4f),
+                selectedContentColor = Color.Black,
+                unselectedContentColor = Color.Gray.copy(0.4f),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {
