@@ -62,6 +62,7 @@ class SignUpViewModel : ViewModel() {
                             errorMessage = "There was an error! Please try again!"
                             isLoading = false
                             isError = true
+
                         }
                 }
                 .addOnFailureListener { exception ->
@@ -101,7 +102,6 @@ class SignUpViewModel : ViewModel() {
                 generateAndStoreUsername(name)
             }
         }
-
         return username
     }
 

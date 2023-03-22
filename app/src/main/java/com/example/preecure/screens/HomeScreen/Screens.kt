@@ -192,6 +192,7 @@ fun ProfileEcommerce(context: Context = LocalContext.current.applicationContext)
 // This composable displays user's image, name, email and edit button
 @Composable
 private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = viewModel()) {
+//    val user = profileViewModel.user.value
     val user = profileViewModel.user.value
         Row(
             modifier = Modifier
@@ -243,7 +244,7 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
 
                     // User's email
                     Text(
-                        text = "Name: ${user.email}",
+                        text = ": ${user.email}",
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontFamily = FontFamily(
