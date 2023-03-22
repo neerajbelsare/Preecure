@@ -1,5 +1,7 @@
 package com.example.preecure.screens.SigninScreen
 
+import android.app.ListActivity
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -22,17 +24,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.preecure.R
 import com.example.preecure.Utils.LoadingState
 import com.example.preecure.navigation.Screens
+import com.example.preecure.screens.SignupScreen.SignUpScreen
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
 @Composable
-fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel = viewModel()) {
+fun SignInScreen(signInViewModel: SignInViewModel = viewModel()) {
     val allInputsFilled = signInViewModel.email.isNotBlank() && signInViewModel.password.isNotBlank()
 
     val status by signInViewModel.loadingState.collectAsState()
@@ -115,7 +117,11 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
         }
 
         if(signInViewModel.isLoggedIn) {
-            navController.navigate(Screens.Home.route)
+//            navController.navigate(Screens.Home.route)
+//            onClick = {
+                val intent = Intent(context, Screens.Home::class.java)
+                context.startActivity(intent)
+//            }
         }
 
         Spacer(modifier = Modifier
@@ -154,6 +160,9 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
 
                     val googleSignInClient = GoogleSignIn.getClient(context, gso)
                     launcher.launch(googleSignInClient.signInIntent)
+
+                    val intent = Intent(context, Screens.Home::class.java)
+                    context.startActivity(intent)
                 }
             ) {
                 Image(
@@ -170,6 +179,8 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
                 ),
                 onClick = {
 
+                    val intent = Intent(context, Screens.Home::class.java)
+                    context.startActivity(intent)
                 }
             ) {
                 Image(
@@ -191,7 +202,11 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
                 text = "New to Preecure?",
             )
 
-            TextButton(onClick = {navController.navigate(Screens.Signup.route)}) {
+            TextButton(onClick = {
+//                navController.navigate(Screens.Signup.route)
+//                val intent = Intent(context, SignUpScreen::class.java)
+//                context.startActivity(intent)
+            }) {
                 Text(text = "Sign Up")
             }
         }

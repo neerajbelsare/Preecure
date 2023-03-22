@@ -1,16 +1,12 @@
 package com.example.preecure.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.preecure.screens.SigninScreen.SignInScreen
 import com.example.preecure.screens.SignupScreen.SignUpScreen
-import androidx.compose.animation.*
-import com.example.preecure.screens.HomeScreen.AccountScreen
 import com.example.preecure.screens.HomeScreen.Home
-import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -35,7 +31,7 @@ fun NavGraph (navController: NavHostController){
         startDestination = startDest)
     {
         composable(route = Screens.Signin.route){
-            SignInScreen(navController)
+            SignInScreen()
         }
         composable(route = Screens.Signup.route){
             SignUpScreen(navController)

@@ -1,5 +1,6 @@
 package com.example.preecure.screens.SignupScreen
 
+import android.content.Intent
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.preecure.MainActivity
 import com.example.preecure.Utils.LoadingState
+import com.example.preecure.screens.SigninScreen.SignInScreen
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.ktx.auth
@@ -56,8 +58,10 @@ class SignUpViewModel : ViewModel() {
                     db.collection("users")
                         .document(it.user!!.uid)
                         .set(newUser)
-                        .addOnSuccessListener { isLoading = false
-                        isSignedUp = true}
+                        .addOnSuccessListener {
+                            isLoading = false
+                             isSignedUp = true
+                        }
                         .addOnFailureListener {
                             errorMessage = "There was an error! Please try again!"
                             isLoading = false

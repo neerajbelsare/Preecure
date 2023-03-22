@@ -1,5 +1,6 @@
 package com.example.preecure.screens.SignupScreen
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -39,7 +40,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 
 @Composable
-fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel = viewModel()) {
+fun SignUpScreen(navController: NavController,
+                 signUpViewModel: SignUpViewModel = viewModel()) {
     val allInputsFilled = signUpViewModel.email.isNotBlank() && signUpViewModel.password.isNotBlank()
 
     val status by signUpViewModel.loadingState.collectAsState()
@@ -145,6 +147,9 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
 
         if (signUpViewModel.isSignedUp) {
             navController.navigate(Screens.Home.route)
+
+//            val intent1 = Intent(context, MainScreen::class.kt)
+//            context.startActivity(intent)
         }
 
         Spacer(modifier = Modifier
@@ -218,7 +223,8 @@ fun SignUpScreen(navController: NavController, signUpViewModel: SignUpViewModel 
                 text = "Already have an account? ",
             )
 
-            TextButton(onClick = {navController.navigate(Screens.Signin.route)}) {
+            TextButton(onClick = {
+                navController.navigate(Screens.Signin.route)}) {
                 Text(text = "Sign In")
             }
         }

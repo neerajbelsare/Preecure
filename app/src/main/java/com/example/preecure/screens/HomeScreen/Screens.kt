@@ -413,6 +413,14 @@ private fun prepareOptionsData() {
             subTitle = "Offers and coupon codes for you"
         )
     )
+
+    optionsList.add(
+        OptionsData(
+            icon = appIcons.Build,
+            title = "Sign Out",
+            subTitle = "Sign out from the application"
+        )
+    )
 }
 
 data class OptionsData(val icon: ImageVector, val title: String, val subTitle: String)
