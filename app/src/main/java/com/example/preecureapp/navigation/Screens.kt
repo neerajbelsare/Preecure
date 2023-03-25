@@ -5,7 +5,6 @@ import com.example.preecureapp.R
 sealed class AuthScreen(val route: String) {
     object SignInScreen: AuthScreen("signin_screen")
     object SignUpScreen: AuthScreen("signup_screen")
-//    object MainScreen : Screens("main_screen")
 }
 
 sealed class Profile(val route: String) {

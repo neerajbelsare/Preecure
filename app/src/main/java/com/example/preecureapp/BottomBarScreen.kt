@@ -1,9 +1,7 @@
 package com.example.preecureapp
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomBarScreen(
@@ -12,20 +10,26 @@ sealed class BottomBarScreen(
     val icon: ImageVector
 ) {
     object Home : BottomBarScreen(
-        route = "HOME",
-        title = "HOME",
+        route = "Home",
+        title = "Home",
         icon = Icons.Default.Home
     )
 
     object Profile : BottomBarScreen(
-        route = "PROFILE",
-        title = "PROFILE",
+        route = "Profile",
+        title = "Profile",
         icon = Icons.Default.Person
     )
 
-    object Settings : BottomBarScreen(
-        route = "SETTINGS",
-        title = "SETTINGS",
-        icon = Icons.Default.Settings
+    object Explore : BottomBarScreen(
+        route = "Explore",
+        title = "Explore",
+        icon = Icons.Default.Explore
+    )
+
+    object Chat : BottomBarScreen(
+        route = "Chat",
+        title = "Chat",
+        icon = Icons.Default.Chat
     )
 }

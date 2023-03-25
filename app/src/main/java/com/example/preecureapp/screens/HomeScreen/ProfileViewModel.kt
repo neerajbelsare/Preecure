@@ -48,25 +48,7 @@ class ProfileViewModel() : ViewModel() {
         }
         return about
     }
-
 }
-
-//suspend fun getUserDetails():NewUser {
-//
-//    val fdb = FirebaseFirestore.getInstance()
-//    var about = NewUser()
-//    try {
-//
-//
-//        fdb.collection("users").get().await().map {
-//            val result = it.toObject(NewUser::class.java)
-//            about = result
-//        }
-//    } catch (e: FirebaseFirestoreException) {
-//        Log.d("error", "getUserDetails: $e")
-//    }
-//    return about
-//}
 
 
 

@@ -6,6 +6,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -51,6 +53,16 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
             Log.w("TAG", "Google sign in failed", e)
         }
     }
+
+    Image(
+    painter = painterResource(id = R.drawable.artboard),
+    contentDescription = "My Image",
+    modifier = Modifier
+        .clip(RoundedCornerShape(0.dp, 0.dp, 15.dp, 15.dp))
+    )
+
+    Spacer(modifier = Modifier
+        .height(30.dp))
 
     Column(
         modifier = Modifier
@@ -124,7 +136,7 @@ fun SignInScreen(navController: NavController, signInViewModel: SignInViewModel 
         }
 
         Spacer(modifier = Modifier
-            .height(30.dp))
+            .height(10.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
