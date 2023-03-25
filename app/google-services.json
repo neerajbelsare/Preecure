@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "434242801666",
+    "project_id": "health-recommender-9ff07",
+    "storage_bucket": "health-recommender-9ff07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434242801666:android:d10a3f5c90d24b0f06171b",
+        "android_client_info": {
+          "package_name": "com.example.preecureapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434242801666-n7jv6l1nqk6qhnbmkl6p5ah49j923n7b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.preecureapp",
+            "certificate_hash": "f7c293d3b2661419a62dbe21beb0efea4c8beb16"
+          }
+        },
+        {
+          "client_id": "434242801666-7cq4qahrb0d96956uca3m791ae1qa7oq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0V3RVpTQjRBipABVeveBv2jx-noRfWWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434242801666-7cq4qahrb0d96956uca3m791ae1qa7oq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
