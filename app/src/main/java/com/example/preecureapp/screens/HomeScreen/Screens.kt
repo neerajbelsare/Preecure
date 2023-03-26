@@ -2,7 +2,6 @@ package com.example.preecure.screens.HomeScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Text
@@ -36,7 +35,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.preecureapp.navigation.Profile
 import com.example.preecureapp.navigation.nav_graph.Graph
 import com.example.preecureapp.screens.HomeScreen.ProfileViewModel
@@ -251,7 +249,8 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
                     .fillMaxWidth()
                     .padding(16.dp)
                     .height(110.dp)
-                    .background(Color.White, RoundedCornerShape(10.dp)),
+                    .background(Color.White, RoundedCornerShape(10.dp))
+                    .shimmer(),
                 verticalAlignment = Alignment.CenterVertically
             ) {}
         }
@@ -268,7 +267,16 @@ private fun OptionsItemStyle(item: OptionsData, context: Context, navController:
             modifier = Modifier
                 .background(Color.White, RoundedCornerShape(10.dp))
                 .clickable(enabled = true) {
-                    navController.navigate(Graph.PROFILE)
+                    when(item.title) {
+                        "Account" -> navController.navigate(Graph.PROFILE)
+                        "My Health" -> navController.navigate(Profile.HealthScreen.route)
+                        "Orders" -> navController.navigate(Profile.OrdersScreen.route)
+                        "Addresses" -> navController.navigate(Profile.AddressesScreen.route)
+                        "Saved Cards" -> navController.navigate(Profile.CardsScreen.route)
+                        "Settings" -> navController.navigate(Profile.SettingsScreen.route)
+                        "Help Center" -> navController.navigate(Profile.HelpScreen.route)
+                        "Offers and Coupons" -> navController.navigate(Profile.OffersScreen.route)
+                    }
                 }
                 .padding(all = 16.dp),
             verticalAlignment = Alignment.CenterVertically

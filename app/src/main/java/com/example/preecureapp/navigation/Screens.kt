@@ -1,6 +1,7 @@
 package com.example.preecureapp.navigation
 
 import com.example.preecureapp.R
+import java.text.Normalizer
 
 sealed class AuthScreen(val route: String) {
     object SignInScreen: AuthScreen("signin_screen")
@@ -16,10 +17,10 @@ sealed class Profile(val route: String) {
     object SettingsScreen: Profile("settings_screen")
     object HelpScreen: Profile("help_screen")
     object OffersScreen: Profile("offers_screen")
-    object OptionsItemStyle : Profile("options_screen")
 }
 
-sealed class DetailsScreen(val route: String) {
-    object Information : DetailsScreen(route = "INFORMATION")
-    object Overview : DetailsScreen(route = "OVERVIEW")
+sealed class FormScreen(val route: String) {
+    object Doctor : FormScreen(route = "DOCTOR")
+    object Lab : FormScreen(route = "LAB")
+    object Pharmacy : FormScreen(route = "PHARMACY")
 }
