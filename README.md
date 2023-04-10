@@ -1,14 +1,14 @@
 # Preecure
 ## Features Recommendations we’ve got :
-1.	Disease database: This could be a comprehensive list of physical-health diseases and their symptoms, causes, and treatments.
-2.	Medication database: This could be a comprehensive list of medications and their indications, contraindications, dosages, side effects, and interactions with other drugs.
-3.	User profile: Users can create a profile with their personal information, including age, gender, medical history, allergies, and medications they are currently taking.
-4.	Symptom checker: Users can input their symptoms, and the app can provide a list of possible diseases that match those symptoms.
-5.	Disease diagnosis: Based on the user's symptoms and medical history, the app can provide a probable diagnosis of the disease.
-6.	Medication recommendation: The app can recommend medications based on the user's diagnosis and medical history, along with dosage and frequency.
-7.	Medication reminder: Users can set reminders to take their medications at specific times.
-8.	Doctor finder: The app can provide a list of doctors and specialists based on the user's location and the type of medical condition they have.
-9.	Emergency help: In case of a medical emergency, the app can provide quick access to emergency contacts, hospitals, and ambulance services.
+1.	**Disease database:** This could be a comprehensive list of physical-health diseases and their symptoms, causes, and treatments.
+2.	**Medication database:** This could be a comprehensive list of medications and their indications, contraindications, dosages, side effects, and interactions with other drugs.
+3.	**User profile:** Users can create a profile with their personal information, including age, gender, medical history, allergies, and medications they are currently taking.
+4.	**Symptom checker:** Users can input their symptoms, and the app can provide a list of possible diseases that match those symptoms.
+5.	**Disease diagnosis:** Based on the user's symptoms and medical history, the app can provide a probable diagnosis of the disease.
+6.	**Medication recommendation:** The app can recommend medications based on the user's diagnosis and medical history, along with dosage and frequency.
+7.	**Medication reminder:** Users can set reminders to take their medications at specific times.
+8.	**Doctor finder:** The app can provide a list of doctors and specialists based on the user's location and the type of medical condition they have.
+9.	**Emergency help:** In case of a medical emergency, the app can provide quick access to emergency contacts, hospitals, and ambulance services.
 
 
 
@@ -21,14 +21,14 @@
 
 
 ## Features that we’ve considered : 
-1.	Ayurvedic-Medicine Recommendation system: This feature could provide personalized recommendations for Ayurvedic medicines based on the user's symptoms and medical history.
-2.	Chat with Doctor: Users can chat with doctors or other healthcare professionals for advice and consultation.
-3.	Daily Notes: Users can keep track of their symptoms, medication usage, and other health-related information on a daily basis.
-4.	Marketplace: Users can purchase Ayurvedic medicines and other health-related products through the app.
-5.	SOS: In case of an emergency, users can quickly call for help through the app.
-6.	Locations of Nearby Pharmacies and Hospitals: The app can provide a list of nearby pharmacies and hospitals based on the user's location.
-7.	Health Plan: Users can create a personalized health plan based on their medical history, current health status, and goals.
-8.	Prescriptions: Users can access and manage their Ayurvedic medicine prescriptions through the app.
+1.	**Ayurvedic-Medicine Recommendation system:** This feature could provide personalized recommendations for Ayurvedic medicines based on the user's symptoms and medical history.
+2.	**Chat with Doctor:** Users can chat with doctors or other healthcare professionals for advice and consultation.
+3.	**Daily Notes:** Users can keep track of their symptoms, medication usage, and other health-related information on a daily basis.
+4.	**Marketplace:** Users can purchase Ayurvedic medicines and other health-related products through the app.
+5.	**SOS:** In case of an emergency, users can quickly call for help through the app.
+6.	**Locations of Nearby Pharmacies and Hospitals:** The app can provide a list of nearby pharmacies and hospitals based on the user's location.
+7.	**Health Plan:** Users can create a personalized health plan based on their medical history, current health status, and goals.
+8.	**Prescriptions:** Users can access and manage their Ayurvedic medicine prescriptions through the app.
 
 Overall, these features could make your Ayurvedic medicine recommendation app more comprehensive and user-friendly. It's important to keep in mind that the success of the app will also depend on the accuracy of the Ayurvedic medicine recommendations and the quality of the healthcare professionals available for consultation. 
 
@@ -108,19 +108,19 @@ Overall, these features could make your Ayurvedic medicine recommendation app mo
 **Frequently Asked Questions:**
 
 - Q: Is the app free to use?
- * A: Yes, the app is completely free to download and use.
+  * A: Yes, the app is completely free to download and use.
 
 - Q: Is the app available for iOS devices?
- * A: Currently, the app is only available for Android devices.
+  * A: Currently, the app is only available for Android devices.
 
 - Q: Can I speak with a licensed doctor through the app?
- * A: Yes, the app offers virtual consultations with licensed healthcare professionals.
+  * A: Yes, the app offers virtual consultations with licensed healthcare professionals.
 
 - Q: Is my personal information secure on the app?
- * A: Yes, the app takes user privacy and security very seriously and employs industry-standard encryption and security protocols to protect user data.
+  * A: Yes, the app takes user privacy and security very seriously and employs industry-standard encryption and security protocols to protect user data.
 
 - Q: How can I provide feedback or report a problem with the app?
- * A: You can reach out to our 24/7 chat support for assistance with any issues or to provide feedback.
+  * A: You can reach out to our 24/7 chat support for assistance with any issues or to provide feedback.
 
 ### Troubleshooting Tips:
 - **App not working:**
