@@ -108,18 +108,23 @@ Overall, these features could make your Ayurvedic medicine recommendation app mo
 **Frequently Asked Questions:**
 
 - Q: Is the app free to use?
+
 A: Yes, the app is completely free to download and use.
 
 - Q: Is the app available for iOS devices?
+
 A: Currently, the app is only available for Android devices.
 
 - Q: Can I speak with a licensed doctor through the app?
+
 A: Yes, the app offers virtual consultations with licensed healthcare professionals.
 
 - Q: Is my personal information secure on the app?
+
 A: Yes, the app takes user privacy and security very seriously and employs industry-standard encryption and security protocols to protect user data.
 
 - Q: How can I provide feedback or report a problem with the app?
+
 A: You can reach out to our 24/7 chat support for assistance with any issues or to provide feedback.
 
 ### Troubleshooting Tips:
