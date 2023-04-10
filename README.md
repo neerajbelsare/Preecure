@@ -1,5 +1,5 @@
 # Preecure
-## **Features Recommendations we’ve got :**
+## Features Recommendations we’ve got :
 1.	Disease database: This could be a comprehensive list of physical-health diseases and their symptoms, causes, and treatments.
 2.	Medication database: This could be a comprehensive list of medications and their indications, contraindications, dosages, side effects, and interactions with other drugs.
 3.	User profile: Users can create a profile with their personal information, including age, gender, medical history, allergies, and medications they are currently taking.
@@ -66,44 +66,43 @@ Overall, these features could make your Ayurvedic medicine recommendation app mo
 
 **Using the App**
 - AI-generated prescriptions:
-* Open the app and navigate to the "Prescriptions" section.
-* Enter your symptoms and health history to generate a personalized health recommendation.
-* Follow the recommended exercise routine and dietary guidelines, and take any temporary medications as directed.
-* Monitor your symptoms over time to see how your health is improving.
+  * Open the app and navigate to the "Prescriptions" section.
+  * Enter your symptoms and health history to generate a personalized health recommendation.
+  * Follow the recommended exercise routine and dietary guidelines, and take any temporary medications as directed.
+  * Monitor your symptoms over time to see how your health is improving.
 
 - Virtual consultations with doctors:
-* Open the app and navigate to the "Consultations" section.
-* Select a licensed healthcare professional from our list of available doctors.
-* Schedule an appointment and connect with the doctor through our virtual platform.
-* Discuss your health concerns and receive expert advice and guidance from the doctor.
+  * Open the app and navigate to the "Consultations" section.
+  * Select a licensed healthcare professional from our list of available doctors.
+  * Schedule an appointment and connect with the doctor through our virtual platform.
+  * Discuss your health concerns and receive expert advice and guidance from the doctor.
 
 - Nearby medical lab locator:
-* Open the app and navigate to the "Medical Labs" section.
-* Allow the app to access your location to find the nearest medical lab.
-* View lab details such as address, hours of operation, and services offered.
-* Visit the lab to take any necessary blood or urine tests.
+  * Open the app and navigate to the "Medical Labs" section.
+  * Allow the app to access your location to find the nearest medical lab.
+  * View lab details such as address, hours of operation, and services offered.
+  * Visit the lab to take any necessary blood or urine tests.
 
 - Personalized health journal:
-* Open the app and navigate to the "My-Journey" section.
-* Record your daily experiences, symptoms, and progress over time.
-* Use the journal to track your overall health and well-being.
+  * Open the app and navigate to the "My-Journey" section.
+  * Record your daily experiences, symptoms, and progress over time.
+  * Use the journal to track your overall health and well-being.
 
 - Emergency SOS button:
-* Open the app and navigate to the "Emergency" section.
-* Press the SOS button to alert your designated emergency contacts that you are in danger.
-* Receive assistance and support from your emergency contacts.
+  * Open the app and navigate to the "Emergency" section.
+  * Press the SOS button to alert your designated emergency contacts that you are in danger.
+  * Receive assistance and support from your emergency contacts.
 
 - Medication reminders:
-* Open the app and navigate to the "Medications" section.
-* Enter the details of your medication, including dosage and frequency.
-* Set up reminders to take your medication on time.
-* Never miss a dose and stay on top of your health.
+  * Open the app and navigate to the "Medications" section.
+  * Enter the details of your medication, including dosage and frequency.
+  * Set up reminders to take your medication on time.
+  * Never miss a dose and stay on top of your health.
 
 - 24/7 chat support:
-* Open the app and navigate to the "Support" section.
-* Initiate a chat with one of our dedicated support team members.
-* Receive prompt and professional assistance with any questions or concerns you may have.
-Include screenshots or images to help illustrate the process.
+  * Open the app and navigate to the "Support" section.
+  * Initiate a chat with one of our dedicated support team members.
+  * Receive prompt and professional assistance with any questions or concerns you may have.
 
 FAQs
 Frequently Asked Questions:
@@ -125,47 +124,47 @@ A: You can reach out to our 24/7 chat support for assistance with any issues or 
 
 **Troubleshooting Tips:**
 - App not working:
-* Ensure that your device is connected to a stable internet connection.
-* Check for any available updates to the app and download them if necessary.
-* If the issue persists, try uninstalling and reinstalling the app.
+  * Ensure that your device is connected to a stable internet connection.
+  * Check for any available updates to the app and download them if necessary.
+  * If the issue persists, try uninstalling and reinstalling the app.
 
 - Trouble generating AI-generated prescriptions:
-* Make sure that you have entered all relevant symptoms and health history accurately.
-* If you are still having trouble, reach out to our 24/7 chat support for assistance.
+  * Make sure that you have entered all relevant symptoms and health history accurately.
+  * If you are still having trouble, reach out to our 24/7 chat support for assistance.
 
 - Issues with virtual consultations:
-* Make sure that you have a stable internet connection and that your device meets the necessary technical requirements for the app.
-* If you are experiencing issues with video or audio quality, try restarting your device and the app.
-* If you are still having trouble, reach out to our 24/7 chat support for assistance.
+  * Make sure that you have a stable internet connection and that your device meets the necessary technical requirements for the app.
+  * If you are experiencing issues with video or audio quality, try restarting your device and the app.
+  * If you are still having trouble, reach out to our 24/7 chat support for assistance.
 
 - Trouble finding nearby medical labs:
-* Make sure that you have allowed the app to access your location.
-* If the issue persists, reach out to our 24/7 chat support for assistance.
+  * Make sure that you have allowed the app to access your location.
+  * If the issue persists, reach out to our 24/7 chat support for assistance.
 
 - Medication reminders not working:
-* Make sure that you have entered your medication details accurately and that your device is connected to a stable internet connection.
-* Check that your device notifications are enabled for the app.
+  * Make sure that you have entered your medication details accurately and that your device is connected to a stable internet connection.
+  * Check that your device notifications are enabled for the app.
 
 - If the issue persists, reach out to our 24/7 chat support for assistance.
 
 **Privacy and Security**
 - Privacy and Security Policies:
-* The app takes user privacy and security very seriously and employs industry-standard encryption and security protocols to protect user data. The app collects and stores user data in accordance with firebase (google-technology), and only uses this data for the purpose of providing healthcare services to users. User data is kept strictly confidential and is only accessible to authorized personnel.
+  * The app takes user privacy and security very seriously and employs industry-standard encryption and security protocols to protect user data. The app collects and stores user data in accordance with firebase (google-technology), and only uses this data for the purpose of providing healthcare services to users. User data is kept strictly confidential and is only accessible to authorized personnel.
 
 - User Data Collection, Storage, and Use:
-* The app collects user data such as age, health history, and symptoms in order to generate AI-generated prescriptions and provide healthcare services to users. This data is stored securely on the app's firebase project account and is only accessible to authorized personnel. User data is used solely for the purpose of providing healthcare services to users and is never shared with third parties without the user's consent.
+  * The app collects user data such as age, health history, and symptoms in order to generate AI-generated prescriptions and provide healthcare services to users. This data is stored securely on the app's firebase project account and is only accessible to authorized personnel. User data is used solely for the purpose of providing healthcare services to users and is never shared with third parties without the user's consent.
 
 - Reporting Privacy or Security Concerns:
-* If any user have any concerns about the privacy or security of their data on the app, they can reach out to our 24/7 chat support to report any issues or ask questions. Our support team will take your concerns seriously and work to resolve any issues as quickly as possible. Additionally, the app has a built-in feature for users to report any privacy or security concerns directly within the app.
+  * If any user have any concerns about the privacy or security of their data on the app, they can reach out to our 24/7 chat support to report any issues or ask questions. Our support team will take your concerns seriously and work to resolve any issues as quickly as possible. Additionally, the app has a built-in feature for users to report any privacy or security concerns directly within the app.
 
 
 **Contact and Support**
 - Contact Information for Customer Support:
-* Users can get in touch with the app's customer support team via the 24/7 chat support feature within the app. The support team is available to answer any questions, provide assistance with using the app's features, and address any issues or concerns that users may have.
+  * Users can get in touch with the app's customer support team via the 24/7 chat support feature within the app. The support team is available to answer any questions, provide assistance with using the app's features, and address any issues or concerns that users may have.
 
 - Getting in Touch with Support:
-* To get in touch with support, users can simply write to team at preecure.health@gmail.com . From there, they can type in their question or concern and a support agent will respond as soon as possible.
+  * To get in touch with support, users can simply write to team at preecure.health@gmail.com . From there, they can type in their question or concern and a support agent will respond as soon as possible.
 
 - Additional Resources:
-* Links to the help center and other resources can be found within the app's settings. Additionally, users can stay up-to-date with the latest app news and updates by following the app's social media accounts (instagram, linkedin) or subscribing to the app's newsletter.
+  * Links to the help center and other resources can be found within the app's settings. Additionally, users can stay up-to-date with the latest app news and updates by following the app's social media accounts (instagram, linkedin) or subscribing to the app's newsletter.
 
