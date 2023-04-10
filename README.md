@@ -20,7 +20,7 @@
 
 
 
-## **Features that we’ve considered : **
+## Features that we’ve considered : 
 1.	Ayurvedic-Medicine Recommendation system: This feature could provide personalized recommendations for Ayurvedic medicines based on the user's symptoms and medical history.
 2.	Chat with Doctor: Users can chat with doctors or other healthcare professionals for advice and consultation.
 3.	Daily Notes: Users can keep track of their symptoms, medication usage, and other health-related information on a daily basis.
