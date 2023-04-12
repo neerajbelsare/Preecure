@@ -224,10 +224,6 @@ fun SignUpScreen(navController: NavController,
         }
     }
 
-    if(signUpViewModel.isSignedUp) {
-        navController.navigate(Graph.HOME)
-    }
-
     when (status.status) {
         LoadingState.Status.FAILED -> {
             Toast.makeText(context, status.msg ?: "Error", Toast.LENGTH_SHORT).show()

@@ -145,7 +145,6 @@ fun ProfileEcommerce(navController: NavController, context: Context = LocalConte
                     item ->
                 OptionsItemStyle(item = item, context = context, navController = navController)
             }
-
         }
     }
 }
@@ -163,24 +162,14 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
     ) {
         if (user != null) {
             // User's image
-            if (profileViewModel.isLoading) {
-                Box(
-                    modifier = Modifier
-                        .size(72.dp)
-                        .padding(start = 20.dp)
-                        .clip(shape = CircleShape)
-                        .shimmer()
-                )
-            } else {
-                Image(
-                    modifier = Modifier
-                        .size(72.dp)
-                        .padding(start = 20.dp)
-                        .clip(shape = CircleShape),
-                    painter = painterResource(id = com.example.preecureapp.R.drawable.victoria),
-                    contentDescription = "Your Image"
-                )
-            }
+            Image(
+                modifier = Modifier
+                    .size(72.dp)
+                    .padding(start = 20.dp)
+                    .clip(shape = CircleShape),
+                painter = painterResource(id = com.example.preecureapp.R.drawable.victoria),
+                contentDescription = "Your Image"
+            )
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -192,55 +181,39 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
                         .weight(weight = 3f, fill = false)
                         .padding(start = 16.dp)
                 ) {
-
-                    // User's name
-                    if (profileViewModel.isLoading) {
-                        Text(
-                            text = "Shimmering Text",
-                            modifier = Modifier.shimmer()
-                        )
-                    } else {
-                        Text(
-                            text = user.name,
-                            style = TextStyle(
-                                fontSize = 22.sp,
-                                fontFamily = FontFamily(
-                                    Font(
-                                        com.example.preecureapp.R.font.roboto_bold,
-                                        FontWeight.Bold
-                                    )
-                                ),
+                    Text(
+                        text = user.name,
+                        style = TextStyle(
+                            fontSize = 22.sp,
+                            fontFamily = FontFamily(
+                                Font(
+                                    com.example.preecureapp.R.font.googlesansdisplay_bold,
+                                    FontWeight.Bold
+                                )
                             ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    }
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
 
                     Spacer(modifier = Modifier.height(2.dp))
 
-                    // User's email
-                    if (profileViewModel.isLoading) {
-                        Text(
-                            text = "Shimmering Text",
-                            modifier = Modifier.shimmer()
-                        )
-                    } else {
-                        Text(
-                            text = user.email,
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontFamily = FontFamily(
-                                    Font(
-                                        com.example.preecureapp.R.font.roboto_regular,
-                                        FontWeight.Normal
-                                    )
-                                ),
-                                color = Color.Gray,
-                                letterSpacing = (0.8).sp
+                    Text(
+                        text = user.email,
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontFamily = FontFamily(
+                                Font(
+                                    com.example.preecureapp.R.font.googlesansdisplay_regular,
+                                    FontWeight.Normal
+                                )
                             ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        ) }
+                            color = Color.Gray,
+                            letterSpacing = (0.8).sp
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
             }
         } else {
@@ -252,22 +225,67 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
                     .background(Color.White, RoundedCornerShape(10.dp))
                     .shimmer(),
                 verticalAlignment = Alignment.CenterVertically
-            ) {}
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(72.dp)
+                        .clip(RoundedCornerShape(40.dp))
+                        .background(Color(0xffbbbbbb))
+                        .padding(start = 20.dp)
+                        .shimmer()
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(weight = 3f, fill = false)
+                            .padding(start = 16.dp)
+                    ) {
+                        Text(
+                            text = "",
+                            modifier = Modifier
+                                .width(200.dp)
+                                .height(20.dp)
+                                .background(Color(0xffbbbbbb))
+                                .shimmer()
+                        )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Text(
+                            text = "",
+                            modifier = Modifier
+                                .width(160.dp)
+                                .height(20.dp)
+                                .background(Color(0xffbbbbbb))
+                                .shimmer()
+                        )
+                    }
+                }
+
+            }
         }
     }
 }
 
 // Row style for options
 @Composable
-private fun OptionsItemStyle(item: OptionsData, context: Context, navController: NavController) {
+private fun OptionsItemStyle(item: OptionsData, context: Context, navController: NavController, profileViewModel: ProfileViewModel = viewModel()) {
+    val user = profileViewModel.user.value
 
-    Box(modifier = Modifier
-        .padding(start = 16.dp, end = 16.dp)) {
+    Box(
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+    ) {
         Row(
             modifier = Modifier
                 .background(Color.White, RoundedCornerShape(10.dp))
                 .clickable(enabled = true) {
-                    when(item.title) {
+                    when (item.title) {
                         "Account" -> navController.navigate(Graph.PROFILE)
                         "My Health" -> navController.navigate(Profile.HealthScreen.route)
                         "Orders" -> navController.navigate(Profile.OrdersScreen.route)
@@ -281,58 +299,125 @@ private fun OptionsItemStyle(item: OptionsData, context: Context, navController:
                 .padding(all = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Icon
-            Icon(
-                modifier = Modifier
-                    .size(32.dp),
-                imageVector = item.icon,
-                contentDescription = item.title,
-                tint = MaterialTheme.colors.primary
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(
+            if(user != null) {
+                // Icon
+                Icon(
                     modifier = Modifier
-                        .weight(weight = 3f, fill = false)
-                        .padding(start = 16.dp)
-                ) {
+                        .size(32.dp),
+                    imageVector = item.icon,
+                    contentDescription = item.title,
+                    tint = MaterialTheme.colors.primary
+                )
 
-                    // Title
-                    Text(
-                        text = item.title,
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            fontFamily = FontFamily(
-                                Font(
-                                    com.example.preecureapp.R.font.roboto_medium,
-                                    FontWeight.Medium
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(weight = 3f, fill = false)
+                            .padding(start = 16.dp)
+                    ) {
+
+                        // Title
+                        Text(
+                            text = item.title,
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                fontFamily = FontFamily(
+                                    Font(
+                                        com.example.preecureapp.R.font.googlesansdisplay_medium,
+                                        FontWeight.Medium
+                                    )
                                 )
                             )
                         )
-                    )
 
-                    Spacer(modifier = Modifier.height(2.dp))
+                        Spacer(modifier = Modifier.height(2.dp))
 
-                    // Sub title
-                    Text(
-                        text = item.subTitle,
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            letterSpacing = (0.8).sp,
-                            fontFamily = FontFamily(
-                                Font(
-                                    com.example.preecureapp.R.font.roboto_regular,
-                                    FontWeight.Normal
+                        // Sub title
+                        Text(
+                            text = item.subTitle,
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                letterSpacing = (0.8).sp,
+                                fontFamily = FontFamily(
+                                    Font(
+                                        com.example.preecureapp.R.font.googlesansdisplay_regular,
+                                        FontWeight.Normal
+                                    )
+                                ),
+                                color = Color.Gray
+                            )
+                        )
+                    }
+                }
+            }
+            else {
+                Box(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(RoundedCornerShape(40.dp))
+                        .background(Color(0xFFECECEC))
+                        .shimmer()
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(46.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(weight = 3f, fill = false)
+                            .padding(start = 16.dp)
+                    ) {
+
+                        // Title
+                        Text(
+                            text = "",
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                fontFamily = FontFamily(
+                                    Font(
+                                        com.example.preecureapp.R.font.googlesansdisplay_medium,
+                                        FontWeight.Medium
+                                    )
                                 )
                             ),
-                            color = Color.Gray
+                            modifier = Modifier
+                                .width(200.dp)
+                                .height(15.dp)
+                                .background(Color(0xFFECECEC))
+                                .shimmer()
                         )
-                    )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        // Sub title
+                        Text(
+                            text = "",
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                letterSpacing = (0.8).sp,
+                                fontFamily = FontFamily(
+                                    Font(
+                                        com.example.preecureapp.R.font.googlesansdisplay_regular,
+                                        FontWeight.Normal
+                                    )
+                                )
+                            ),
+                            modifier = Modifier
+                                .width(160.dp)
+                                .height(15.dp)
+                                .background(Color(0xFFECECEC))
+                                .shimmer()
+                        )
+                    }
                 }
             }
         }
@@ -408,12 +493,11 @@ private fun prepareOptionsData() {
             subTitle = "Offers and coupon codes for you"
         )
     )
-
     optionsList.add(
         OptionsData(
-            icon = appIcons.Build,
-            title = "Sign Out",
-            subTitle = "Sign out from the application"
+            icon = appIcons.Abc,
+            title = "",
+            subTitle = ""
         )
     )
 }

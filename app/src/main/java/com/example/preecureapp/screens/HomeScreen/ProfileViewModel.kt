@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.preecureapp.screens.AccountNavScreens.RetrieveUser
 import com.example.preecureapp.screens.SignupScreen.NewUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,7 +21,7 @@ class ProfileViewModel() : ViewModel() {
 
     private val db = Firebase.firestore
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    val user = mutableStateOf<NewUser?>(null)
+    val user = mutableStateOf<RetrieveUser?>(null)
 
     init {
         isLoading = true
@@ -32,14 +33,14 @@ class ProfileViewModel() : ViewModel() {
         }
     }
 
-    suspend fun getUserDetails(): NewUser {
+    suspend fun getUserDetails(): RetrieveUser {
 
         val fdb = FirebaseFirestore.getInstance()
-        var about = NewUser()
+        var about = RetrieveUser()
         try {
             isLoading = true
             fdb.collection("users").get().await().map {
-                val result = it.toObject(NewUser::class.java)
+                val result = it.toObject(RetrieveUser::class.java)
                 about = result
                 isLoading = false
             }

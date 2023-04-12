@@ -45,8 +45,6 @@ fun BottomBar(navController: NavHostController) {
     if (bottomBarDestination) {
         BottomNavigation(
             modifier = Modifier
-                .padding(bottom = 10.dp, start = 25.dp, end = 25.dp)
-                .clip(RoundedCornerShape(30.dp))
                 .background(Color.White),
             contentColor = Color.Black
         ) {
@@ -70,10 +68,8 @@ fun RowScope.AddItem(
     BottomNavigationItem(
         modifier = Modifier
             .background(Color.White)
-            .clip(RoundedCornerShape(30.dp)),
-        label = {
-            Text(text = screen.title)
-        },
+            .padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 20.dp)
+            .clip(RoundedCornerShape(10.dp)),
         icon = {
             Icon(
                 imageVector = screen.icon,
