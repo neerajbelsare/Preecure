@@ -1,6 +1,5 @@
 package com.example.preecureapp.navigation.nav_graph
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
@@ -10,8 +9,8 @@ import com.example.preecureapp.BottomBarScreen
 import com.example.preecureapp.navigation.FormScreen
 import com.example.preecureapp.navigation.Profile
 import com.example.preecureapp.screens.AccountNavScreens.*
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.AccountScreen
 import com.example.preecureapp.screens.ScreenContent
-import java.text.Normalizer
 
 @Composable
 fun HomeNavGraph(navController: NavHostController) {

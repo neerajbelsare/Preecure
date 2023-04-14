@@ -68,11 +68,11 @@ fun RowScope.AddItem(
     BottomNavigationItem(
         modifier = Modifier
             .background(Color.White)
-            .padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 20.dp)
-            .clip(RoundedCornerShape(10.dp)),
+            .padding(top = 7.dp, bottom = 7.dp, start = 10.dp, end = 10.dp)
+            .clip(RoundedCornerShape(40.dp)),
         icon = {
             Icon(
-                imageVector = screen.icon,
+                painter = painterResource(id = screen.icon),
                 contentDescription = "Navigation Icon"
             )
         },

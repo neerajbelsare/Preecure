@@ -93,6 +93,9 @@ dependencies {
 
     implementation "com.google.accompanist:accompanist-swiperefresh:0.25.1"
 
+    //Glide Image
+    implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
+
     // Stream SDK
     implementation "io.getstream:stream-chat-android-compose:5.4.0"
     implementation "androidx.compose.material:material-icons-extended:$compose_ui_version"

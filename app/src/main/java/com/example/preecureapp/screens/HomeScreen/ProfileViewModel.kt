@@ -18,10 +18,11 @@ import kotlinx.coroutines.tasks.await
 
 class ProfileViewModel() : ViewModel() {
     var isLoading by mutableStateOf(false)
+    var imageUrl by mutableStateOf("")
 
     private val db = Firebase.firestore
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    val user = mutableStateOf<RetrieveUser?>(null)
+    val user = mutableStateOf(RetrieveUser())
 
     init {
         isLoading = true
@@ -30,6 +31,9 @@ class ProfileViewModel() : ViewModel() {
     private fun getData() {
         viewModelScope.launch {
             user.value = getUserDetails()
+            val userDetails = user.value
+
+            imageUrl = userDetails.imageUrl
         }
     }
 

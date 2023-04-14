@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import android.content.Context
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,7 +26,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -35,6 +38,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.example.preecureapp.R
 import com.example.preecureapp.navigation.Profile
 import com.example.preecureapp.navigation.nav_graph.Graph
 import com.example.preecureapp.screens.HomeScreen.ProfileViewModel
@@ -149,6 +155,7 @@ fun ProfileEcommerce(navController: NavController, context: Context = LocalConte
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = viewModel()) {
     val user = profileViewModel.user.value
@@ -162,13 +169,14 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
     ) {
         if (user != null) {
             // User's image
-            Image(
+            GlideImage(
+                model = profileViewModel.imageUrl,
+                contentDescription = "Your Image",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(72.dp)
                     .padding(start = 20.dp)
-                    .clip(shape = CircleShape),
-                painter = painterResource(id = com.example.preecureapp.R.drawable.victoria),
-                contentDescription = "Your Image"
+                    .size(72.dp)
+                    .clip(CircleShape),
             )
 
             Row(
@@ -187,7 +195,7 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
                             fontSize = 22.sp,
                             fontFamily = FontFamily(
                                 Font(
-                                    com.example.preecureapp.R.font.googlesansdisplay_bold,
+                                    R.font.googlesansdisplay_bold,
                                     FontWeight.Bold
                                 )
                             ),
@@ -204,7 +212,7 @@ private fun UserDetails(context: Context, profileViewModel: ProfileViewModel = v
                             fontSize = 14.sp,
                             fontFamily = FontFamily(
                                 Font(
-                                    com.example.preecureapp.R.font.googlesansdisplay_regular,
+                                    R.font.googlesansdisplay_regular,
                                     FontWeight.Normal
                                 )
                             ),

@@ -44,7 +44,8 @@ class SignUpViewModel : ViewModel() {
                     val newUser = hashMapOf(
                         "name" to user.name,
                         "email" to user.email,
-                        "phone" to user.phoneNumber,
+                        "phone" to user.phone,
+                        "password" to user.password,
                         "username" to username,
                         "isDoctor" to false,
                         "isPharmacy" to false,

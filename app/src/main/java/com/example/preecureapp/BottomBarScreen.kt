@@ -1,34 +1,27 @@
 package com.example.preecureapp
 
-import android.graphics.drawable.Icon
-import android.graphics.drawable.VectorDrawable
-import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 
 sealed class BottomBarScreen(
     val route: String,
-    val icon: ImageVector
+    val icon: Int
 ) {
     object Home : BottomBarScreen(
         route = "Home",
-        icon = Icons.Default.Home
+        icon = R.drawable.ic_home
     )
 
     object Profile : BottomBarScreen(
         route = "Profile",
-        icon = Icons.Default.Person
+        icon = R.drawable.ic_profile
     )
 
     object Explore : BottomBarScreen(
         route = "Explore",
-        icon = Icons.Default.Explore
+        icon = R.drawable.ic_explore
     )
 
     object Chat : BottomBarScreen(
         route = "Chat",
-        icon = Icons.Default.Chat
+        icon = R.drawable.ic_chat
     )
 }
