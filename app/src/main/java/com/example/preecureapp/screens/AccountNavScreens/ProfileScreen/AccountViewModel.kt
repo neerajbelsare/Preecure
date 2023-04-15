@@ -38,11 +38,6 @@ class AccountViewModel : ViewModel() {
     var imageUrl by mutableStateOf("")
 
     var isLoading by mutableStateOf(false)
-    var isError by mutableStateOf(false)
-    var isEmpty by mutableStateOf(false)
-    var errorMessage by mutableStateOf("")
-
-    val loadingState = MutableStateFlow(LoadingState.IDLE)
 
     private val db = Firebase.firestore
     private val currentUser = FirebaseAuth.getInstance().currentUser

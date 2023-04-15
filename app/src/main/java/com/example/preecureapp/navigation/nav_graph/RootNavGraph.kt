@@ -6,7 +6,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.preecureapp.screens.HomeScreen.HomeScreen
-import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -15,6 +14,7 @@ fun isUserSignedIn(): Boolean {
     return currentUser != null
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SetupNavGraph(
     navController: NavHostController
