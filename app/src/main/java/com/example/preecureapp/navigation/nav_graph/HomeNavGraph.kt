@@ -8,11 +8,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.example.preecure.screens.HomeScreen.ProfileScreen
 import com.example.preecureapp.BottomBarScreen
+import com.example.preecureapp.navigation.DoctorScreen
 import com.example.preecureapp.navigation.FormScreen
 import com.example.preecureapp.navigation.Profile
 import com.example.preecureapp.screens.AccountNavScreens.*
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.AccountScreen
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.DoctorConfirmScreen
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.DoctorForm
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.DoctorForm2
 import com.example.preecureapp.screens.ScreenContent
 
 @Composable
@@ -99,6 +102,21 @@ fun NavGraphBuilder.formNavGraph(navController: NavHostController) {
         }
         composable(route = FormScreen.Pharmacy.route) {
             PharmacyForm()
+        }
+
+    }
+    doctorNavGraph(navController = navController)
+}
+fun NavGraphBuilder.doctorNavGraph(navController: NavHostController) {
+    navigation(
+        route = Graph.DOCTOR,
+        startDestination = DoctorScreen.DoctorForm2.route
+    ) {
+        composable(route = DoctorScreen.DoctorForm2.route) {
+            DoctorForm2(navController = navController)
+        }
+        composable(route = DoctorScreen.DoctorConfirm.route) {
+            DoctorConfirmScreen()
         }
     }
 }

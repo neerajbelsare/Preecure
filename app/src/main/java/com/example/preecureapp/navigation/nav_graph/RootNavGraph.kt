@@ -44,4 +44,5 @@ object Graph {
     const val DETAILS = "details_graph"
     const val PROFILE = "profile_graph"
     const val FORMS = "form_graph"
+    const val DOCTOR = "doctor_graph"
 }

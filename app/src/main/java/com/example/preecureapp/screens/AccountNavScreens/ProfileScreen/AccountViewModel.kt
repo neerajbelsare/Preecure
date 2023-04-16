@@ -38,9 +38,8 @@ class AccountViewModel : ViewModel() {
     var imageUrl by mutableStateOf("")
 
     var isLoading by mutableStateOf(false)
+    var isUpdated by mutableStateOf(false)
 
-    private val db = Firebase.firestore
-    private val currentUser = FirebaseAuth.getInstance().currentUser
     val user = mutableStateOf(RetrieveUser())
 
     init {
@@ -83,6 +82,7 @@ class AccountViewModel : ViewModel() {
     }
 
     fun updateUserDetails() {
+        isLoading = true
         val currentUser = FirebaseAuth.getInstance().currentUser
         val firebase = FirebaseFirestore.getInstance()
         val userDocRef = firebase.collection("users").document(currentUser!!.uid)
@@ -93,6 +93,13 @@ class AccountViewModel : ViewModel() {
             "phone" to phone
         )
         userDocRef.update(updatedDetails)
+            .addOnSuccessListener {
+                isLoading = false
+                isUpdated = true
+            }
+            .addOnFailureListener {
+                isLoading = false
+            }
     }
 
     fun uploadImageToStorage(imageUri: Uri): Task<Uri> {

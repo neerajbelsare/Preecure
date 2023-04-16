@@ -43,13 +43,14 @@ import com.example.preecureapp.navigation.AuthScreen
 import com.example.preecureapp.navigation.nav_graph.Graph
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.CustomTopAppBarWithBackButton
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DoctorForm(navController: NavController,
                  doctorFormViewModel: DoctorFormViewModel = viewModel()) {
     val allInputsFilled =
-        doctorFormViewModel.email.isNotBlank() && doctorFormViewModel.email.isNotBlank()
+        doctorFormViewModel.name.isNotBlank() && doctorFormViewModel.speciality.isNotBlank()
                 && doctorFormViewModel.email.isNotBlank() && doctorFormViewModel.phone.isNotBlank()
+                && doctorFormViewModel.startTime.isNotBlank() && doctorFormViewModel.endTime.isNotBlank()
+                && doctorFormViewModel.experience.isNotBlank() && doctorFormViewModel.qualification.isNotBlank()
 
     Scaffold(
         topBar = {
@@ -106,6 +107,7 @@ fun DoctorForm(navController: NavController,
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
                 ),
+                maxLines = 1
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -130,7 +132,8 @@ fun DoctorForm(navController: NavController,
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
-                )
+                ),
+                maxLines = 1
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -156,7 +159,7 @@ fun DoctorForm(navController: NavController,
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
                 ),
-                visualTransformation = PasswordVisualTransformation()
+                maxLines = 1
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -262,7 +265,7 @@ fun DoctorForm(navController: NavController,
             Box(modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)) {
-                Text(doctorFormViewModel.selectedStartTime,
+                Text(doctorFormViewModel.startTime,
                     modifier = Modifier
                         .height(40.dp)
                         .width(150.dp)
@@ -278,7 +281,7 @@ fun DoctorForm(navController: NavController,
                 ) {
                     items.forEachIndexed { index, s ->
                         DropdownMenuItem(onClick = {
-                            doctorFormViewModel.selectedStartTime = s
+                            doctorFormViewModel.startTime = s
                             expanded = false
                         }) {
                             val disabledText = if (s == disabledValue) {
@@ -355,7 +358,7 @@ fun DoctorForm(navController: NavController,
             Box(modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)) {
-                Text(doctorFormViewModel.selectedEndTime,
+                Text(doctorFormViewModel.endTime,
                     modifier = Modifier
                         .height(40.dp)
                         .width(150.dp)
@@ -371,7 +374,7 @@ fun DoctorForm(navController: NavController,
                 ) {
                     items1.forEachIndexed { index, s ->
                         DropdownMenuItem(onClick = {
-                            doctorFormViewModel.selectedEndTime = s
+                            doctorFormViewModel.endTime = s
                             expanded1 = false
                         }) {
                             val disabledText = if (s == disabledValue1) {
@@ -403,8 +406,8 @@ fun DoctorForm(navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.phone,
-                onValueChange = { doctorFormViewModel.phone = it },
+                value = doctorFormViewModel.experience,
+                onValueChange = { doctorFormViewModel.experience = it },
 
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number
@@ -435,41 +438,12 @@ fun DoctorForm(navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.email,
-                onValueChange = { doctorFormViewModel.email = it },
+                value = doctorFormViewModel.qualification,
+                onValueChange = { doctorFormViewModel.qualification = it },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
                 ),
-            )
-
-            Spacer(modifier = Modifier.height(28.dp))
-
-            val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri ->
-                uri?.let {
-                    doctorFormViewModel.uploadImageToStorage(it).addOnSuccessListener { imageUrl ->
-                        doctorFormViewModel.saveImageUrlToFirestore(imageUrl.toString())
-                    }
-                }
-            }
-
-            Text(
-                text = "Upload Document Proof for Educational Qualification",
-                modifier = Modifier
-                    .padding(start = 3.dp, bottom = 10.dp),
-                color = Color(0xFF474747),
-                fontFamily = FontFamily(
-                    Font(
-                        com.example.preecureapp.R.font.googlesansdisplay_bold,
-                        FontWeight.Bold
-                    )
-                )
-            )
-            Image(
-                painter = painterResource(id = com.example.preecureapp.R.drawable.file_upload),
-                contentDescription = "Upload Document",
-                modifier = Modifier
-                    .fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(28.dp))
@@ -492,14 +466,20 @@ fun DoctorForm(navController: NavController,
                 }
             } else {
                 Button(
-                    onClick = { doctorFormViewModel.insertDoctorUser() },
+                    onClick = {
+                        doctorFormViewModel.insertDoctorUser(DoctorInfo(doctorFormViewModel.name,
+                            doctorFormViewModel.speciality, doctorFormViewModel.email, doctorFormViewModel.phone,
+                        doctorFormViewModel.startTime, doctorFormViewModel.endTime, doctorFormViewModel.experience,
+                        doctorFormViewModel.qualification))
+                        navController.navigate(Graph.DOCTOR) },
+
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(40.dp),
                     shape = RoundedCornerShape(40.dp),
                     enabled = allInputsFilled
                 ) {
-                    Text("Save")
+                    Text("Next")
                 }
             }
 

@@ -24,3 +24,8 @@ sealed class FormScreen(val route: String) {
     object Lab : FormScreen(route = "LAB")
     object Pharmacy : FormScreen(route = "PHARMACY")
 }
+
+sealed class DoctorScreen(val route: String) {
+    object DoctorForm2 : DoctorScreen(route = "DOCTOR2")
+    object DoctorConfirm : FormScreen(route = "CONFIRM")
+}
