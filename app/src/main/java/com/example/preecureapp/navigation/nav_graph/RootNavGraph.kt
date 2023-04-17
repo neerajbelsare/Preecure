@@ -14,7 +14,6 @@ fun isUserSignedIn(): Boolean {
     return currentUser != null
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SetupNavGraph(
     navController: NavHostController

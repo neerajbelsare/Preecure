@@ -16,8 +16,10 @@ import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,34 +37,140 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.example.preecure.ui.theme.MainColor
 import com.example.preecureapp.R
 import com.example.preecureapp.navigation.Profile
 import com.example.preecureapp.navigation.nav_graph.Graph
 import com.example.preecureapp.screens.HomeScreen.ProfileViewModel
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
 import com.valentinilk.shimmer.shimmer
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 @Composable
-fun HomeScreen() {
+fun IndicatorDot(
+    modifier: Modifier = Modifier,
+    size: Dp,
+    color: Color
+) {
+    Box(
+        modifier = modifier
+            .size(size)
+            .clip(CircleShape)
+            .background(color)
+    )
+}
+
+@Composable
+fun DotsIndicator(
+    modifier: Modifier = Modifier,
+    totalDots: Int,
+    selectedIndex: Int,
+    selectedColor: Color = MainColor,
+    unSelectedColor: Color = Color.Gray,
+    dotSize: Dp
+) {
+    LazyRow(
+        modifier = modifier
+            .wrapContentWidth()
+            .wrapContentHeight()
+    ) {
+        items(totalDots) { index ->
+            IndicatorDot(
+                color = if (index == selectedIndex) selectedColor else unSelectedColor,
+                size = dotSize
+            )
+
+            if (index != totalDots - 1) {
+                Spacer(modifier = Modifier.padding(horizontal = 2.dp))
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun AutoSlidingCarousel(
+    modifier: Modifier = Modifier,
+    autoSlideDuration: Long = 4000,
+    pagerState: PagerState = remember { PagerState() },
+    itemsCount: Int,
+    itemContent: @Composable (index: Int) -> Unit,
+) {
+    val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
+
+    LaunchedEffect(pagerState.currentPage) {
+        delay(autoSlideDuration)
+        pagerState.animateScrollToPage((pagerState.currentPage + 1) % itemsCount)
+    }
+
+    Box(
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        HorizontalPager(count = itemsCount, state = pagerState) { page ->
+            itemContent(page)
+        }
+
+        // you can remove the surface in case you don't want
+        // the transparant bacground
+        Surface(
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .align(Alignment.BottomCenter),
+            shape = CircleShape,
+            color = Color.Black.copy(alpha = 0.5f)
+        ) {
+            DotsIndicator(
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                totalDots = itemsCount,
+                selectedIndex = if (isDragged) pagerState.currentPage else pagerState.targetPage,
+                dotSize = 8.dp
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun HomeScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)
     ) {
-        Text(
-            text = "Home View",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center,
-            fontSize = 25.sp
+        val images = listOf(
+            R.drawable.feature1, R.drawable.feature2, R.drawable.feature3, R.drawable.feature4
         )
+
+        Card(
+            modifier = Modifier.padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+        ) {
+            AutoSlidingCarousel(
+                itemsCount = images.size,
+                itemContent = { index ->
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(images[index])
+                            .build(),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.height(200.dp)
+                    )
+                }
+            )
+        }
     }
 }
 

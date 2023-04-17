@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.example.preecure.screens.HomeScreen.HomeScreen
 import com.example.preecure.screens.HomeScreen.ProfileScreen
 import com.example.preecureapp.BottomBarScreen
 import com.example.preecureapp.navigation.DoctorScreen
@@ -26,12 +27,7 @@ fun HomeNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            ScreenContent(
-                name = BottomBarScreen.Home.route,
-                onClick = {
-                    navController.navigate(Graph.DETAILS)
-                }
-            )
+            HomeScreen(navController = navController)
         }
         composable(route = BottomBarScreen.Profile.route) {
             ProfileScreen(navController = navController)
