@@ -21,7 +21,7 @@
 
 
 ## Features that we’ve considered : 
-1.	**Ayurvedic-Medicine Recommendation system:** This feature could provide personalized recommendations for Ayurvedic medicines based on the user's symptoms and medical history.
+1.	**Medicine Recommendation System:** This feature could provide personalized recommendations for medicines based on the user's symptoms and medical history.
 2.	**Chat with Doctor:** Users can chat with doctors or other healthcare professionals for advice and consultation.
 3.	**Daily Notes:** Users can keep track of their symptoms, medication usage, and other health-related information on a daily basis.
 4.	**Blog Posts and Featured Articles:** Users can gain accurate medical knowledge through verified blog posts and articles.
