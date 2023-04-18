@@ -24,11 +24,12 @@
 1.	**Ayurvedic-Medicine Recommendation system:** This feature could provide personalized recommendations for Ayurvedic medicines based on the user's symptoms and medical history.
 2.	**Chat with Doctor:** Users can chat with doctors or other healthcare professionals for advice and consultation.
 3.	**Daily Notes:** Users can keep track of their symptoms, medication usage, and other health-related information on a daily basis.
-4.	**Marketplace:** Users can purchase Ayurvedic medicines and other health-related products through the app.
-5.	**SOS:** In case of an emergency, users can quickly call for help through the app.
-6.	**Locations of Nearby Pharmacies and Hospitals:** The app can provide a list of nearby pharmacies and hospitals based on the user's location.
-7.	**Health Plan:** Users can create a personalized health plan based on their medical history, current health status, and goals.
-8.	**Prescriptions:** Users can access and manage their Ayurvedic medicine prescriptions through the app.
+4.	**Blog Posts and Featured Articles:** Users can gain accurate medical knowledge through verified blog posts and articles.
+5.	**Marketplace:** Users can purchase Ayurvedic medicines and other health-related products through the app.
+6.	**SOS:** In case of an emergency, users can quickly call for help through the app.
+7.	**Locations of Nearby Pharmacies and Hospitals:** The app can provide a list of nearby pharmacies and hospitals based on the user's location.
+8.	**Health Plan:** Users can create a personalized health plan based on their medical history, current health status, and goals.
+9.	**Prescriptions:** Users can access and manage their Ayurvedic medicine prescriptions through the app.
 
 Overall, these features could make your Ayurvedic medicine recommendation app more comprehensive and user-friendly. It's important to keep in mind that the success of the app will also depend on the accuracy of the Ayurvedic medicine recommendations and the quality of the healthcare professionals available for consultation. 
 
