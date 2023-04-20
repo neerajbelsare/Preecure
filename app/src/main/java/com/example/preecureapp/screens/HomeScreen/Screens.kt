@@ -16,15 +16,27 @@ import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Mail
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.clip
@@ -140,15 +152,78 @@ fun AutoSlidingCarousel(
         }
     }
 }
+@Composable
+fun GridItem(icon: ImageVector, text: String) {
+    Column(
+        modifier = Modifier.padding(18.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(icon, contentDescription = text)
+        Text(text = text)
+    }
+}
+
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(navController: NavController) {
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .wrapContentSize(Alignment.Center)
+            .verticalScroll(state = scrollState),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Row(modifier = Modifier
+            .padding(start = 15.dp, end = 15.dp)
+            .clip(
+                RoundedCornerShape(
+                    topStart = 16.dp,
+                    topEnd = 16.dp
+                )
+            )
+            .fillMaxWidth()
+            .background(color = Color.White)) {
+            Spacer(Modifier.weight(0.3f))
+            GridItem(icon = Icons.Filled.Home, text = "Home")
+            Spacer(Modifier.weight(1f))
+            GridItem(icon = Icons.Filled.Settings, text = "Settings")
+            Spacer(Modifier.weight(1f))
+            GridItem(icon = Icons.Filled.Person, text = "Profile")
+            Spacer(Modifier.weight(0.3f))
+        }
+        Row(modifier = Modifier
+            .padding(start = 15.dp, end = 15.dp)
+            .fillMaxWidth()
+            .background(color = Color.White)) {
+            Spacer(Modifier.weight(0.3f))
+            GridItem(icon = Icons.Filled.Search, text = "Search")
+            Spacer(Modifier.weight(0.9f))
+            GridItem(icon = Icons.Filled.Mail, text = "Mail")
+            Spacer(Modifier.weight(1f))
+            GridItem(icon = Icons.Filled.Phone, text = "Phone")
+            Spacer(Modifier.weight(0.3f))
+        }
+        Row(modifier = Modifier
+            .padding(start = 15.dp, end = 15.dp)
+            .clip(
+                RoundedCornerShape(
+                    bottomStart = 16.dp,
+                    bottomEnd = 16.dp
+                )
+            )
+            .fillMaxWidth()
+            .background(color = Color.White)) {
+            GridItem(icon = Icons.Filled.CalendarToday, text = "Calendar")
+            Spacer(Modifier.weight(0.7f))
+            GridItem(icon = Icons.Filled.CameraAlt, text = "Camera")
+            Spacer(Modifier.weight(1f))
+            GridItem(icon = Icons.Filled.PlayArrow, text = "Play")
+            Spacer(Modifier.weight(0.3f))
+        }
+
+        Spacer(modifier = Modifier.height(30.dp))
+
         val images = listOf(
             R.drawable.feature1, R.drawable.feature2, R.drawable.feature3, R.drawable.feature4
         )
@@ -170,6 +245,65 @@ fun HomeScreen(navController: NavController) {
                     )
                 }
             )
+        }
+        Card(
+            modifier = Modifier
+                .padding(start = 15.dp, end = 15.dp, top = 20.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth(),
+            elevation = 10.dp,
+        ) {
+            Image(painter = painterResource(id = R.drawable.card1), contentDescription = null)
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(start = 15.dp, end = 15.dp, top = 20.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth(),
+            elevation = 10.dp,
+        ) {
+            Image(painter = painterResource(id = R.drawable.card2), contentDescription = null)
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(start = 15.dp, end = 15.dp, top = 20.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth(),
+            elevation = 10.dp,
+        ) {
+            Image(painter = painterResource(id = R.drawable.card3), contentDescription = null)
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(start = 15.dp, end = 15.dp, top = 20.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth(),
+            elevation = 10.dp,
+        ) {
+            Image(painter = painterResource(id = R.drawable.card4), contentDescription = null)
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(start = 15.dp, end = 15.dp, top = 20.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth(),
+            elevation = 10.dp,
+        ) {
+            Image(painter = painterResource(id = R.drawable.card5), contentDescription = null)
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(start = 15.dp, end = 15.dp, top = 20.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth(),
+            elevation = 10.dp,
+        ) {
+            Image(painter = painterResource(id = R.drawable.card6), contentDescription = null)
         }
     }
 }
