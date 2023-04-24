@@ -33,6 +33,8 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.preecure.ui.theme.MainColor
 import com.example.preecureapp.R
 import com.example.preecureapp.navigation.AuthScreen
+import com.example.preecureapp.navigation.FormScreen
+import com.example.preecureapp.navigation.LabScreen
 import com.example.preecureapp.navigation.nav_graph.Graph
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -302,7 +304,9 @@ fun AccountScreen(navController: NavController, accountViewModel: AccountViewMod
                     .height(64.dp)
                     .background(Color.White)
                     .border(1.dp, Color(0xFFDADADA), RoundedCornerShape(10.dp))
-                    .clickable(onClick = {})
+                    .clickable(onClick = {
+                        navController.navigate(FormScreen.Lab.route)
+                    })
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -327,7 +331,9 @@ fun AccountScreen(navController: NavController, accountViewModel: AccountViewMod
                     .height(64.dp)
                     .background(Color.White)
                     .border(1.dp, Color(0xFFDADADA), RoundedCornerShape(10.dp))
-                    .clickable(onClick = {})
+                    .clickable(onClick = {
+                        navController.navigate(FormScreen.Pharmacy.route)
+                    })
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {

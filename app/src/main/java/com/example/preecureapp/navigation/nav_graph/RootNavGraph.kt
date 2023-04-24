@@ -1,6 +1,5 @@
 package com.example.preecureapp.navigation.nav_graph
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -40,8 +39,9 @@ object Graph {
     const val ROOT = "root_graph"
     const val AUTHENTICATION = "auth_graph"
     const val HOME = "home_graph"
-    const val DETAILS = "details_graph"
     const val PROFILE = "profile_graph"
     const val FORMS = "form_graph"
     const val DOCTOR = "doctor_graph"
+    const val LAB = "lab_graph"
+    const val PHARMACY = "pharmacy_graph"
 }

@@ -11,12 +11,19 @@ import com.example.preecure.screens.HomeScreen.ProfileScreen
 import com.example.preecureapp.BottomBarScreen
 import com.example.preecureapp.navigation.DoctorScreen
 import com.example.preecureapp.navigation.FormScreen
+import com.example.preecureapp.navigation.LabScreen
+import com.example.preecureapp.navigation.PharmacyScreen
 import com.example.preecureapp.navigation.Profile
 import com.example.preecureapp.screens.AccountNavScreens.*
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.AccountScreen
-import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.DoctorConfirmScreen
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.LabConfirmScreen
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.DoctorForm
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.DoctorForm2
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.LabForm
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.LabForm2
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.PharmacyConfirmScreen
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.PharmacyForm
+import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.DoctorForm.PharmacyForm2
 import com.example.preecureapp.screens.ScreenContent
 
 @Composable
@@ -94,14 +101,16 @@ fun NavGraphBuilder.formNavGraph(navController: NavHostController) {
             DoctorForm(navController = navController)
         }
         composable(route = FormScreen.Lab.route) {
-            LabForm()
+            LabForm(navController = navController)
         }
         composable(route = FormScreen.Pharmacy.route) {
-            PharmacyForm()
+            PharmacyForm(navController = navController)
         }
 
     }
     doctorNavGraph(navController = navController)
+    labNavGraph(navController = navController)
+    pharmacyNavGraph(navController = navController)
 }
 fun NavGraphBuilder.doctorNavGraph(navController: NavHostController) {
     navigation(
@@ -112,7 +121,35 @@ fun NavGraphBuilder.doctorNavGraph(navController: NavHostController) {
             DoctorForm2(navController = navController)
         }
         composable(route = DoctorScreen.DoctorConfirm.route) {
-            DoctorConfirmScreen()
+            LabConfirmScreen()
+        }
+    }
+}
+
+fun NavGraphBuilder.labNavGraph(navController: NavHostController) {
+    navigation(
+        route = Graph.LAB,
+        startDestination = LabScreen.LabForm2.route
+    ) {
+        composable(route = LabScreen.LabForm2.route) {
+            LabForm2(navController = navController)
+        }
+        composable(route = LabScreen.LabConfirm.route) {
+            LabConfirmScreen()
+        }
+    }
+}
+
+fun NavGraphBuilder.pharmacyNavGraph(navController: NavHostController) {
+    navigation(
+        route = Graph.PHARMACY,
+        startDestination = PharmacyScreen.PharmacyForm2.route
+    ) {
+        composable(route = PharmacyScreen.PharmacyForm2.route) {
+            PharmacyForm2(navController = navController)
+        }
+        composable(route = PharmacyScreen.PharmacyConfirm.route) {
+            PharmacyConfirmScreen()
         }
     }
 }

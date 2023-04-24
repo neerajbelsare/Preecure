@@ -11,14 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.OffsetMapping
-import androidx.compose.ui.text.input.TransformedText
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,19 +25,19 @@ import com.example.preecureapp.navigation.nav_graph.Graph
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.CustomTopAppBarWithBackButton
 
 @Composable
-fun DoctorForm(navController: NavController,
-               doctorFormViewModel: DoctorFormViewModel = viewModel()) {
+fun PharmacyForm(navController: NavController,
+               pharmacyFormViewModel: PharmacyFormViewModel = viewModel()) {
     val allInputsFilled =
-        doctorFormViewModel.name.isNotBlank() && doctorFormViewModel.speciality.isNotBlank()
-                && doctorFormViewModel.email.isNotBlank() && doctorFormViewModel.phone.isNotBlank()
-                && doctorFormViewModel.startTime.isNotBlank() && doctorFormViewModel.endTime.isNotBlank()
-                && doctorFormViewModel.experience.isNotBlank() && doctorFormViewModel.qualification.isNotBlank()
+        pharmacyFormViewModel.name.isNotBlank() && pharmacyFormViewModel.address.isNotBlank()
+                && pharmacyFormViewModel.email.isNotBlank() && pharmacyFormViewModel.phone.isNotBlank()
+                && pharmacyFormViewModel.startTime.isNotBlank() && pharmacyFormViewModel.endTime.isNotBlank()
+                && pharmacyFormViewModel.latitude.isNotBlank() && pharmacyFormViewModel.longitude.isNotBlank()
 
     Scaffold(
         topBar = {
             CustomTopAppBarWithBackButton(
                 navController = navController,
-                appBarTitle = "Doctor Application Form",
+                appBarTitle = "Pharmacy Application Form",
                 backgroundColor = Color.White
             )
         },
@@ -61,8 +58,8 @@ fun DoctorForm(navController: NavController,
                     .clip(RoundedCornerShape(10.dp))
             ) {
                 Image(
-                    painter = painterResource(id = com.example.preecureapp.R.drawable.doctor),
-                    contentDescription = "Register as a Doctor",
+                    painter = painterResource(id = com.example.preecureapp.R.drawable.pharmacy),
+                    contentDescription = "Register as a Pharmacy",
                     modifier = Modifier
                         .fillMaxWidth()
                 )
@@ -85,8 +82,12 @@ fun DoctorForm(navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.name,
-                onValueChange = { doctorFormViewModel.name = it },
+                value = pharmacyFormViewModel.name,
+                onValueChange = { pharmacyFormViewModel.name = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
@@ -96,7 +97,7 @@ fun DoctorForm(navController: NavController,
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Speciality/Area of Expertise",
+                text = "Permanent Address",
                 modifier = Modifier
                     .padding(start = 3.dp, bottom = 10.dp),
                 color = Color(0xFF474747),
@@ -111,8 +112,12 @@ fun DoctorForm(navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.speciality,
-                onValueChange = { doctorFormViewModel.speciality = it },
+                value = pharmacyFormViewModel.address,
+                onValueChange = { pharmacyFormViewModel.address = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
@@ -137,8 +142,12 @@ fun DoctorForm(navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.email,
-                onValueChange = { doctorFormViewModel.email = it },
+                value = pharmacyFormViewModel.email,
+                onValueChange = { pharmacyFormViewModel.email = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
@@ -164,11 +173,11 @@ fun DoctorForm(navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.phone,
-                onValueChange = { doctorFormViewModel.phone = it },
-
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Phone
+                value = pharmacyFormViewModel.phone,
+                onValueChange = { pharmacyFormViewModel.phone = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone,
+                    imeAction = ImeAction.Next
                 ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
@@ -249,7 +258,7 @@ fun DoctorForm(navController: NavController,
             Box(modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)) {
-                Text(doctorFormViewModel.startTime,
+                Text(pharmacyFormViewModel.startTime,
                     modifier = Modifier
                         .height(40.dp)
                         .width(150.dp)
@@ -265,7 +274,7 @@ fun DoctorForm(navController: NavController,
                 ) {
                     items.forEachIndexed { index, s ->
                         DropdownMenuItem(onClick = {
-                            doctorFormViewModel.startTime = s
+                            pharmacyFormViewModel.startTime = s
                             expanded = false
                         }) {
                             val disabledText = if (s == disabledValue) {
@@ -342,7 +351,7 @@ fun DoctorForm(navController: NavController,
             Box(modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)) {
-                Text(doctorFormViewModel.endTime,
+                Text(pharmacyFormViewModel.endTime,
                     modifier = Modifier
                         .height(40.dp)
                         .width(150.dp)
@@ -358,7 +367,7 @@ fun DoctorForm(navController: NavController,
                 ) {
                     items1.forEachIndexed { index, s ->
                         DropdownMenuItem(onClick = {
-                            doctorFormViewModel.endTime = s
+                            pharmacyFormViewModel.endTime = s
                             expanded1 = false
                         }) {
                             val disabledText = if (s == disabledValue1) {
@@ -375,7 +384,7 @@ fun DoctorForm(navController: NavController,
             Spacer(modifier = Modifier.height(28.dp))
 
             Text(
-                text = "Years of Experience",
+                text = "Exact Location of your Pharmacy (Latitude, Longitude)",
                 modifier = Modifier
                     .padding(start = 3.dp, bottom = 10.dp),
                 color = Color(0xFF474747),
@@ -390,40 +399,31 @@ fun DoctorForm(navController: NavController,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.experience,
-                onValueChange = { doctorFormViewModel.experience = it },
-
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Number
+                value = pharmacyFormViewModel.latitude,
+                onValueChange = { pharmacyFormViewModel.latitude = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
                 ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
                 ),
-                maxLines = 1,
-                visualTransformation = LimitInputToTwoCharactersVisualTransformation()
+                maxLines = 1
             )
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            Text(
-                text = "Educational Qualification",
-                modifier = Modifier
-                    .padding(start = 3.dp, bottom = 10.dp),
-                color = Color(0xFF474747),
-                fontFamily = FontFamily(
-                    Font(
-                        com.example.preecureapp.R.font.googlesansdisplay_bold,
-                        FontWeight.Bold
-                    )
-                )
-            )
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp),
-                value = doctorFormViewModel.qualification,
-                onValueChange = { doctorFormViewModel.qualification = it },
+                value = pharmacyFormViewModel.longitude,
+                onValueChange = { pharmacyFormViewModel.longitude = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
+                ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = MainColor,
                     unfocusedBorderColor = Color(0xFFDADADA),
@@ -432,7 +432,7 @@ fun DoctorForm(navController: NavController,
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            if (doctorFormViewModel.isLoading) {
+            if (pharmacyFormViewModel.isLoading) {
                 Button(
                     onClick = {},
                     modifier = Modifier
@@ -451,11 +451,11 @@ fun DoctorForm(navController: NavController,
             } else {
                 Button(
                     onClick = {
-                        doctorFormViewModel.insertDoctorUser(DoctorInfo(doctorFormViewModel.name,
-                            doctorFormViewModel.speciality, doctorFormViewModel.email, doctorFormViewModel.phone,
-                        doctorFormViewModel.startTime, doctorFormViewModel.endTime, doctorFormViewModel.experience,
-                        doctorFormViewModel.qualification))
-                        navController.navigate(Graph.DOCTOR) },
+                        pharmacyFormViewModel.insertPharmacyUser(PharmacyInfo(pharmacyFormViewModel.name,
+                            pharmacyFormViewModel.address, pharmacyFormViewModel.email, pharmacyFormViewModel.phone,
+                        pharmacyFormViewModel.startTime, pharmacyFormViewModel.endTime, pharmacyFormViewModel.latitude,
+                        pharmacyFormViewModel.longitude))
+                        navController.navigate(Graph.PHARMACY) },
 
                     modifier = Modifier
                         .fillMaxWidth()
@@ -469,13 +469,6 @@ fun DoctorForm(navController: NavController,
 
             Spacer(modifier = Modifier.height(38.dp))
         }
-    }
-}
-
-class LimitInputToTwoCharactersVisualTransformation : VisualTransformation {
-    override fun filter(text: AnnotatedString): TransformedText {
-        val newText = text.text.take(2) // Limit to 2 characters
-        return TransformedText(AnnotatedString(newText), OffsetMapping.Identity)
     }
 }
 

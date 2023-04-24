@@ -174,6 +174,8 @@ fun HomeScreen(navController: NavController) {
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Spacer(modifier = Modifier
+            .height(50.dp))
         Row(modifier = Modifier
             .padding(start = 15.dp, end = 15.dp)
             .clip(
@@ -185,11 +187,11 @@ fun HomeScreen(navController: NavController) {
             .fillMaxWidth()
             .background(color = Color.White)) {
             Spacer(Modifier.weight(0.3f))
-            GridItem(icon = Icons.Filled.Home, text = "Home")
+            GridItem(icon = Icons.Filled.Home, text = "Chat with Doctor")
             Spacer(Modifier.weight(1f))
-            GridItem(icon = Icons.Filled.Settings, text = "Settings")
+            GridItem(icon = Icons.Filled.Settings, text = "Find Labs and Pharmacies")
             Spacer(Modifier.weight(1f))
-            GridItem(icon = Icons.Filled.Person, text = "Profile")
+            GridItem(icon = Icons.Filled.Person, text = "View Articles")
             Spacer(Modifier.weight(0.3f))
         }
         Row(modifier = Modifier
@@ -197,7 +199,7 @@ fun HomeScreen(navController: NavController) {
             .fillMaxWidth()
             .background(color = Color.White)) {
             Spacer(Modifier.weight(0.3f))
-            GridItem(icon = Icons.Filled.Search, text = "Search")
+            GridItem(icon = Icons.Filled.Search, text = "Buy Medicines")
             Spacer(Modifier.weight(0.9f))
             GridItem(icon = Icons.Filled.Mail, text = "Mail")
             Spacer(Modifier.weight(1f))
@@ -222,7 +224,7 @@ fun HomeScreen(navController: NavController) {
             Spacer(Modifier.weight(0.3f))
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         val images = listOf(
             R.drawable.feature1, R.drawable.feature2, R.drawable.feature3, R.drawable.feature4
@@ -246,9 +248,20 @@ fun HomeScreen(navController: NavController) {
                 }
             )
         }
+
         Card(
             modifier = Modifier
-                .padding(start = 15.dp, end = 15.dp, top = 20.dp)
+                .padding(start = 15.dp, end = 15.dp, top = 3.dp, bottom = 5.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth(),
+            elevation = 10.dp,
+        ) {
+            Image(painter = painterResource(id = R.drawable.card_special), contentDescription = null)
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(start = 15.dp, end = 15.dp, top = 10.dp)
                 .clip(RoundedCornerShape(16.dp))
                 .fillMaxWidth(),
             elevation = 10.dp,
@@ -305,6 +318,9 @@ fun HomeScreen(navController: NavController) {
         ) {
             Image(painter = painterResource(id = R.drawable.card6), contentDescription = null)
         }
+
+        Spacer(modifier = Modifier
+            .height(80.dp))
     }
 }
 

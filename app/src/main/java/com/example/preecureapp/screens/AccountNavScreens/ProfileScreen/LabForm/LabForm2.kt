@@ -39,12 +39,11 @@ import com.example.preecureapp.navigation.DoctorScreen
 import com.example.preecureapp.screens.AccountNavScreens.ProfileScreen.CustomTopAppBarWithBackButton
 
 @Composable
-fun DoctorForm2(navController: NavController,
-                doctorFormViewModel: DoctorFormViewModel = viewModel()
+fun LabForm2(navController: NavController,
+                labFormViewModel: LabFormViewModel = viewModel()
 ) {
-    val allInputsFilled = doctorFormViewModel.qualificationUrl != "https://drive.google.com/file/d/1jaMTdkE-IxTEHRVsHaDwUNTEHm-U8xVw/view?usp=sharing"
-            || doctorFormViewModel.identityUrl != "https://drive.google.com/file/d/1jaMTdkE-IxTEHRVsHaDwUNTEHm-U8xVw/view?usp=sharing"
-            || doctorFormViewModel.profileUrl != "https://drive.google.com/file/d/1jaMTdkE-IxTEHRVsHaDwUNTEHm-U8xVw/view?usp=sharing"
+    val allInputsFilled = labFormViewModel.imageUrl != "https://drive.google.com/file/d/1jaMTdkE-IxTEHRVsHaDwUNTEHm-U8xVw/view?usp=sharing"
+            || labFormViewModel.proofUrl != "https://drive.google.com/file/d/1jaMTdkE-IxTEHRVsHaDwUNTEHm-U8xVw/view?usp=sharing"
 
     Scaffold(
         topBar = {
@@ -71,8 +70,8 @@ fun DoctorForm2(navController: NavController,
                     .clip(RoundedCornerShape(10.dp))
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.doctor),
-                    contentDescription = "Register as a Doctor",
+                    painter = painterResource(id = R.drawable.lab),
+                    contentDescription = "Register as a Lab",
                     modifier = Modifier
                         .fillMaxWidth()
                 )
@@ -83,9 +82,9 @@ fun DoctorForm2(navController: NavController,
             val launcher =
                 rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri ->
                     uri?.let {
-                        doctorFormViewModel.uploadImageToStorage(it)
+                        labFormViewModel.uploadImageToStorage(it)
                             .addOnSuccessListener { imageUrl ->
-                                doctorFormViewModel.saveImageUrlToFirestore(imageUrl.toString(), 1)
+                                labFormViewModel.saveImageUrlToFirestore(imageUrl.toString(), 1)
                             }
                     }
                 }
@@ -93,25 +92,15 @@ fun DoctorForm2(navController: NavController,
             val launcher1 =
                 rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri ->
                     uri?.let {
-                        doctorFormViewModel.uploadImageToStorage(it)
+                        labFormViewModel.uploadImageToStorage(it)
                             .addOnSuccessListener { imageUrl ->
-                                doctorFormViewModel.saveImageUrlToFirestore(imageUrl.toString(), 2)
-                            }
-                    }
-                }
-
-            val launcher2 =
-                rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri ->
-                    uri?.let {
-                        doctorFormViewModel.uploadImageToStorage(it)
-                            .addOnSuccessListener { imageUrl ->
-                                doctorFormViewModel.saveImageUrlToFirestore(imageUrl.toString(), 3)
+                                labFormViewModel.saveImageUrlToFirestore(imageUrl.toString(), 2)
                             }
                     }
                 }
 
             Text(
-                text = "Upload Government-verified Document for Identity and Address Verification",
+                text = "Upload a Picture of your Lab",
                 modifier = Modifier
                     .padding(start = 3.dp, bottom = 10.dp),
                 color = Color(0xFF474747),
@@ -133,29 +122,7 @@ fun DoctorForm2(navController: NavController,
             Spacer(modifier = Modifier.height(28.dp))
 
             Text(
-                text = "Upload Document Proof for Educational Qualification",
-                modifier = Modifier
-                    .padding(start = 3.dp, bottom = 10.dp),
-                color = Color(0xFF474747),
-                fontFamily = FontFamily(
-                    Font(
-                        com.example.preecureapp.R.font.googlesansdisplay_bold,
-                        FontWeight.Bold
-                    )
-                )
-            )
-            Image(
-                painter = painterResource(id = com.example.preecureapp.R.drawable.file_upload),
-                contentDescription = "Upload Document",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { launcher1.launch("*/*") }
-            )
-
-            Spacer(modifier = Modifier.height(28.dp))
-
-            Text(
-                text = "Profile Photo",
+                text = "Upload Document Proof for additional verification",
                 modifier = Modifier
                     .padding(start = 3.dp, bottom = 10.dp),
                 color = Color(0xFF474747),
@@ -167,21 +134,16 @@ fun DoctorForm2(navController: NavController,
                 )
             )
             Image(
-                painter = painterResource(id = com.example.preecureapp.R.drawable.defaultprofile),
+                painter = painterResource(id = R.drawable.file_upload),
                 contentDescription = "Upload Document",
-                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(132.dp)
-                    .clip(CircleShape)
-                    .border(7.dp, Color(0xFFF7F7F7), CircleShape)
-                    .align(Alignment.CenterHorizontally)
-                    .scale(1f, 1f)
-                    .clickable { launcher2.launch("image/*") }
+                    .fillMaxWidth()
+                    .clickable { launcher1.launch("*/*") }
             )
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            if (doctorFormViewModel.isLoading) {
+            if (labFormViewModel.isLoading) {
                 Button(
                     onClick = {},
                     modifier = Modifier
